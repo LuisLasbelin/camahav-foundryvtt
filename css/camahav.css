@@ -245,6 +245,9 @@
 }
 
 /* Styles limited to camahav sheets */
+.camahav {
+  /** ABILITIES **/
+}
 .camahav .item-form {
   font-family: "Roboto", sans-serif;
 }
@@ -289,6 +292,10 @@
 }
 .camahav .tox .tox-edit-area {
   padding: 0 8px;
+}
+.camahav .ability input {
+  font-size: var(--font-size-16);
+  width: 32px;
 }
 .camahav .resource-label {
   font-weight: bold;

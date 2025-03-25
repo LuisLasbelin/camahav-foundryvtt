@@ -26,4 +26,22 @@ CAMAHAV.abilityAbbreviations = {
   emp: 'CAMAHAV.Ability.Emp.abbr',
 };
 
-CAMAHAV.abilityCost = [2, 1, 0, -1, -3, -5, -8]
+CAMAHAV.actionResult =[
+  'CAMAHAV.Result.Bad',
+  'CAMAHAV.Result.Poor',
+  'CAMAHAV.Result.Fair',
+  'CAMAHAV.Result.Good',
+  'CAMAHAV.Result.VeryGood',
+  'CAMAHAV.Result.Great',
+  'CAMAHAV.Result.Excellent',
+  'CAMAHAV.Result.Excellent',
+  'CAMAHAV.Result.Incredible',
+  'CAMAHAV.Result.Incredible',
+  'CAMAHAV.Result.Heroic',
+  'CAMAHAV.Result.Heroic',
+  'CAMAHAV.Result.Legendary',
+  'CAMAHAV.Result.Legendary',
+  'CAMAHAV.Result.Legendary',
+]
+
+CAMAHAV.pointBuy = [0, 0, 1, 3, 5, 8]

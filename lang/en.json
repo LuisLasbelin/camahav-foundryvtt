@@ -10,8 +10,22 @@
       "Wil": { "long": "Will", "abbr": "wil" },
       "Emp": { "long": "Empathy", "abbr": "emp" }
     },
+    "Physical": "Physical",
+    "Mental": "Mental",
     "Vigor": "Vigor",
     "Resolve": "Resolve",
+    "Result": {
+      "Bad": "No evidence of skill is shown at all.",
+      "Poor": "Some success, but it’s an amateurish showing. The work may be dodgy; reception will be mediocre.",
+      "Fair": "Demonstrates skill appropriate to his class or profession— not especially good, but not bad.",
+      "Good": "The performance is significantly above the expectation of a competent practitioner.",
+      "VeryGood": "Rewards for exceptional performance accrue.",
+      "Great": "Instant recognition is likely to accrue; this is approaching world-class.",
+      "Excellent": "This is the kind of performance that, if reliably repeated, will lead to renown and fame.",
+      "Incredible": "The character has done so well, some people are convinced that he’s a genius, or that he has magical powers, or that he’s cheating.",
+      "Heroic": "Of great renown, heroic, once-in-a-lifetime.",
+      "Legendary": "Legendary! Will change the world."
+    },
     "SheetLabels": {
       "Actor": "Camahav Actor Sheet",
       "Item": "Camahav Item Sheet"

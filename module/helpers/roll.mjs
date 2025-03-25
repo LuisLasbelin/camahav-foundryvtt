@@ -59,7 +59,8 @@ export async function pRoll(_actor, _label = "CAMAHAV.ChanceRoll", _dice = 2, _t
 
     const content = await renderTemplate('systems/camahav/templates/message/roll.hbs', {
         total: r._total,
-        results: results
+        results: results,
+        performance: game.i18n.localize(CONFIG.CAMAHAV.actionResult[r._total])
     })
 
     r.toMessage({
