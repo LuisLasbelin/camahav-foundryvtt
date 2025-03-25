@@ -293,9 +293,20 @@
 .camahav .tox .tox-edit-area {
   padding: 0 8px;
 }
+.camahav .mental-title {
+  background-image: url(../assets/stars.png);
+  background-repeat: no-repeat;
+  background-position-x: right;
+}
+.camahav .physical-title {
+  background-image: url(../assets/physical.png);
+  background-repeat: no-repeat;
+  background-position-x: right;
+}
 .camahav .ability input {
   font-size: var(--font-size-16);
   width: 32px;
+  margin: 6px;
 }
 .camahav .resource-label {
   font-weight: bold;
