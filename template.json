@@ -1,0 +1,87 @@
+{
+  "Actor": {
+    "types": ["character", "npc"],
+    "templates": {
+      "base": {
+        "vigor": {
+          "max": 0,
+          "value": 0
+        },
+        "resolve": {
+          "max": 0,
+          "value": 0
+        },
+        "biography": ""
+      }
+    },
+    "character": {
+      "templates": ["base"],
+      "attributes": {
+        "level": {
+          "value": 1
+        }
+      },
+      "abilities": {
+        "str": {
+          "value": 1
+        },
+        "pre": {
+          "value": 1
+        },
+        "con": {
+          "value": 1
+        },
+        "mov": {
+          "value": 1
+        },
+        "per": {
+          "value": 1
+        },
+        "wil": {
+          "value": 1
+        },
+        "int": {
+          "value": 1
+        },
+        "emp": {
+          "value": 1
+        }
+      },
+      "classes": [],
+      "knowledge": [],
+      "status": {
+        "poison": 0,
+        "fatigue": 0,
+        "wounded": 0,
+        "stunned": 0,
+        "agitated": 0,
+        "cursed": 0
+      }
+    },
+    "npc": {
+      "templates": ["base"],
+      "cr": 0
+    }
+  },
+  "Item": {
+    "types": ["item", "feature", "spell"],
+    "templates": {
+      "base": {
+        "description": ""
+      }
+    },
+    "item": {
+      "templates": ["base"],
+      "quantity": 1,
+      "weight": 0,
+      "formula": "d20 + @str.mod + ceil(@lvl / 2)"
+    },
+    "feature": {
+      "templates": ["base"]
+    },
+    "spell": {
+      "templates": ["base"],
+      "spellLevel": 1
+    }
+  }
+}

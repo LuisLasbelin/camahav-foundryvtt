@@ -1,0 +1,45 @@
+{
+  "CAMAHAV": {
+    "Ability": {
+      "Str": { "long": "Strength", "abbr": "str" },
+      "Con": { "long": "Constitution", "abbr": "con" },
+      "Mov": { "long": "Movement", "abbr": "mov" },
+      "Pre": { "long": "Precision", "abbr": "pre" },
+      "Per": { "long": "Perception", "abbr": "per" },
+      "Int": { "long": "Intellect", "abbr": "int" },
+      "Wil": { "long": "Will", "abbr": "wil" },
+      "Emp": { "long": "Empathy", "abbr": "emp" }
+    },
+    "Vigor": "Vigor",
+    "Resolve": "Resolve",
+    "SheetLabels": {
+      "Actor": "Camahav Actor Sheet",
+      "Item": "Camahav Item Sheet"
+    },
+    "Item": {
+      "Spell": {
+        "SpellLVL": "Level {level} Spells",
+        "AddLVL": "Add LVL {level}"
+      }
+    },
+    "Effect": {
+      "Source": "Source",
+      "Toggle": "Toggle Effect",
+      "Temporary": "Temporary Effects",
+      "Passive": "Passive Effects",
+      "Inactive": "Inactive Effects"
+    }
+  },
+
+  "TYPES": {
+    "Actor": {
+      "character": "Character",
+      "npc": "NPC"
+    },
+    "Item": {
+      "item": "Item",
+      "feature": "Feature",
+      "spell": "Spell"
+    }
+  }
+}
