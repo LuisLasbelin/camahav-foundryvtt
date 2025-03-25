@@ -26,6 +26,15 @@
       "Heroic": "Of great renown, heroic, once-in-a-lifetime.",
       "Legendary": "Legendary! Will change the world."
     },
+    "StatusEffects": "Status effects",
+    "Status": {
+      "Poison": "Poison",
+      "Fatigue": "Fatigue",
+      "Stunned": "Stunned",
+      "Agitated": "Agitated",
+      "Wounded": "Wounded",
+      "Cursed": "Cursed"
+    },
     "SheetLabels": {
       "Actor": "Camahav Actor Sheet",
       "Item": "Camahav Item Sheet"

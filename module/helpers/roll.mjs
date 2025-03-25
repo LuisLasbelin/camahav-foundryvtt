@@ -4,12 +4,19 @@
  * @param {Number} target minimum number to get a single success.
  * @param {Number} difficulty amount of successes needed.
  */
-export async function pRoll(_actor, _label = "CAMAHAV.ChanceRoll", _dice = 2, _target = 6, _difficulty = 3) {
+export async function pRoll(_actor, _label = "CAMAHAV.ChanceRoll", _dice = 2, _penalties = [], _target = 6, _difficulty = 3) {
 
     let r = new Roll();
     var results = {}
 
-    if (_dice == -2) {
+    // If the penalty equals the dice, remove one extra dice to avoid getting into 0.
+    if(_dice == _penalties.length) {
+        _dice -= 1
+    }
+
+    _dice -= _penalties.length * 2
+
+    if (_dice <= -2) {
         r = new Roll(`1d8`);
 
         // Execute the roll
@@ -24,7 +31,7 @@ export async function pRoll(_actor, _label = "CAMAHAV.ChanceRoll", _dice = 2, _t
         }
     }
 
-    if (_dice == -1) {
+    if (_dice == -1 || _dice == 0) {
         r = new Roll(`1d8`);
 
         // Execute the roll
@@ -59,8 +66,10 @@ export async function pRoll(_actor, _label = "CAMAHAV.ChanceRoll", _dice = 2, _t
 
     const content = await renderTemplate('systems/camahav/templates/message/roll.hbs', {
         total: CONFIG.CAMAHAV.Roman[r._total],
+        penalties: _penalties,
         results: results,
-        performance: game.i18n.localize(CONFIG.CAMAHAV.actionResult[r._total])
+        performance: game.i18n.localize(CONFIG.CAMAHAV.actionResult[r._total]),
+        actor: _actor
     })
 
     r.toMessage({

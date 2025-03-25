@@ -238,8 +238,18 @@ export class CamahavActorSheet extends ActorSheet {
 
     // Handle rolls that supply the formula directly.
     if (dataset.roll) {
+      var status = []
       if (dataset.rollType == 'ability') {
-        pRoll(this.actor, dataset.label, dataset.roll)
+        // Check status effects
+        if(["str", "con"].includes(dataset.ability) && this.actor.getRollData().status.poison > this.actor.getRollData().vigor.value) status.push(game.i18m.localize("CAMAHAV.Status.Poison"))
+        if(["mov", "pre"].includes(dataset.ability) && this.actor.getRollData().status.fatigue > this.actor.getRollData().vigor.value) status.push(game.i18m.localize("CAMAHAV.Status.Fatigue"))
+        if(["str", "con", "mov", "pre"].includes(dataset.ability) && this.actor.getRollData().status.wounded > this.actor.getRollData().vigor.value) status.push(game.i18m.localize("CAMAHAV.Status.Wounded"))
+        if(["per", "int"].includes(dataset.ability) && this.actor.getRollData().stunned.stunned > this.actor.getRollData().resolve.value) status.push(game.i18m.localize("CAMAHAV.Status.Stunned"))
+        if(["wil", "emp"].includes(dataset.ability) && this.actor.getRollData().agitated.agitated > this.actor.getRollData().resolve.value) status.push(game.i18m.localize("CAMAHAV.Status.Agitated"))
+        if(["per", "int", "wil", "emp"].includes(dataset.ability) && this.actor.getRollData().status.cursed > this.actor.getRollData().resolve.value) status.push(game.i18m.localize("CAMAHAV.Status.Cursed"))
+
+        // Roll with Poisson d8
+        pRoll(this.actor, dataset.label, dataset.roll, status)
         return
       }
       let label = dataset.label ? `[ability] ${dataset.label}` : '';

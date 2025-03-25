@@ -62,22 +62,22 @@
               {{!Column 1}}
               <div>
                 <div class="ability flexcol flex-group-center">
-                  <label for="system.abilities.str.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.str.value}}" data-roll-type='ability' data-label="system.abilities.str.label">{{system.abilities.str.label}}</label>
+                  <label for="system.abilities.str.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.str.value}}" data-roll-type='ability' data-ability="str" data-label="system.abilities.str.label">{{system.abilities.str.label}}</label>
                   <input type="text" name="system.abilities.str.value" value="{{system.abilities.str.value}}" data-dtype="Number"/>
                 </div>
                 <div class="ability flexcol flex-group-center">
-                  <label for="system.abilities.con.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.con.value}}" data-roll-type='ability' data-label="system.abilities.con.label">{{system.abilities.con.label}}</label>
+                  <label for="system.abilities.con.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.con.value}}" data-roll-type='ability' data-ability="con" data-label="system.abilities.con.label">{{system.abilities.con.label}}</label>
                   <input type="text" name="system.abilities.con.value" value="{{system.abilities.con.value}}" data-dtype="Number"/>
                 </div>
               </div>
               {{!Column 2}}
               <div>
                 <div class="ability flexcol flex-group-center">
-                  <label for="system.abilities.pre.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.pre.value}}" data-roll-type='ability' data-label="system.abilities.pre.label">{{system.abilities.pre.label}}</label>
+                  <label for="system.abilities.pre.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.pre.value}}" data-roll-type='ability' data-ability="pre" data-label="system.abilities.pre.label">{{system.abilities.pre.label}}</label>
                   <input type="text" name="system.abilities.pre.value" value="{{system.abilities.pre.value}}" data-dtype="Number"/>
                 </div>
                 <div class="ability flexcol flex-group-center">
-                  <label for="system.abilities.mov.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.mov.value}}" data-roll-type='ability' data-label="system.abilities.mov.label">{{system.abilities.mov.label}}</label>
+                  <label for="system.abilities.mov.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.mov.value}}" data-roll-type='ability' data-ability="mov" data-label="system.abilities.mov.label">{{system.abilities.mov.label}}</label>
                   <input type="text" name="system.abilities.mov.value" value="{{system.abilities.mov.value}}" data-dtype="Number"/>
                 </div>
               </div>
@@ -89,26 +89,55 @@
               {{!Column 1}}
               <div>
                 <div class="ability flexcol flex-group-center">
-                  <label for="system.abilities.per.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.per.value}}" data-roll-type='ability' data-label="system.abilities.per.label">{{system.abilities.per.label}}</label>
+                  <label for="system.abilities.per.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.per.value}}" data-roll-type='ability' data-ability="per" data-label="system.abilities.per.label">{{system.abilities.per.label}}</label>
                   <input type="text" name="system.abilities.per.value" value="{{system.abilities.per.value}}" data-dtype="Number"/>
                 </div>
                 <div class="ability flexcol flex-group-center">
-                  <label for="system.abilities.int.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.int.value}}" data-roll-type='ability' data-label="system.abilities.int.label">{{system.abilities.int.label}}</label>
+                  <label for="system.abilities.int.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.int.value}}" data-roll-type='ability' data-ability="int" data-label="system.abilities.int.label">{{system.abilities.int.label}}</label>
                   <input type="text" name="system.abilities.int.value" value="{{system.abilities.int.value}}" data-dtype="Number"/>
                 </div>
               </div>
               {{!Column 2}}
               <div>
                 <div class="ability flexcol flex-group-center">
-                  <label for="system.abilities.wil.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.wil.value}}" data-roll-type='ability' data-label="system.abilities.wil.label">{{system.abilities.wil.label}}</label>
+                  <label for="system.abilities.wil.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.wil.value}}" data-roll-type='ability' data-ability="wil" data-label="system.abilities.wil.label">{{system.abilities.wil.label}}</label>
                   <input type="text" name="system.abilities.wil.value" value="{{system.abilities.wil.value}}" data-dtype="Number"/>
                 </div>
                 <div class="ability flexcol flex-group-center">
-                  <label for="system.abilities.emp.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.emp.value}}" data-roll-type='ability' data-label="system.abilities.emp.label">{{system.abilities.emp.label}}</label>
+                  <label for="system.abilities.emp.value" class="resource-label rollable flexlarge align-left" data-roll="{{system.abilities.emp.value}}" data-roll-type='ability' data-ability="emp" data-label="system.abilities.emp.label">{{system.abilities.emp.label}}</label>
                   <input type="text" name="system.abilities.emp.value" value="{{system.abilities.emp.value}}" data-dtype="Number"/>
                 </div>
               </div>
             </div>
+            </div>
+          </div>
+          <h3>{{localize 'CAMAHAV.StatusEffects'}}</h3>
+          <div class="grid grid-4col">
+            <div class="ability flexcol flex-group-center">
+              <label for="system.status.poison" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Poison'}}</label>
+              <input type="text" name="system.status.poison" value="{{system.status.poison}}" data-dtype="Number"/>
+            </div>
+            <div class="ability flexcol flex-group-center">
+              <label for="system.status.fatigue" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Fatigue'}}</label>
+              <input type="text" name="system.status.fatigue" value="{{system.status.fatigue}}" data-dtype="Number"/>
+            </div>
+            <div class="ability flexcol flex-group-center">
+              <label for="system.status.stunned" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Stunned'}}</label>
+              <input type="text" name="system.status.stunned" value="{{system.status.stunned}}" data-dtype="Number"/>
+            </div>
+            <div class="ability flexcol flex-group-center">
+              <label for="system.status.agitated" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Agitated'}}</label>
+              <input type="text" name="system.status.agitated" value="{{system.status.agitated}}" data-dtype="Number"/>
+            </div>
+          </div>
+          <div class="grid grid-2col">
+             <div class="ability flexcol flex-group-center">
+              <label for="system.status.wounded" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Wounded'}}</label>
+              <input type="text" name="system.status.wounded" value="{{system.status.wounded}}" data-dtype="Number"/>
+            </div>
+            <div class="ability flexcol flex-group-center">
+              <label for="system.status.cursed" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Cursed'}}</label>
+              <input type="text" name="system.status.cursed" value="{{system.status.cursed}}" data-dtype="Number"/>
             </div>
           </div>
           <span>P: {{pointBuy}}</span>
