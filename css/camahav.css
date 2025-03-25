@@ -12,12 +12,15 @@
 
 .message .roll-result {
   border-radius: 15px;
-  border: 5px solid #400080;
+  border: 5px solid #443627;
+  box-shadow: inset 0px 2px 5px #443627;
+  background-color: #F2F6D0;
   text-align: center;
 }
 .message .roll-result h4 {
   margin: 0;
   font-size: var(--font-size-20);
+  font-weight: bold;
 }
 .message .dice-rolls {
   list-style: none;

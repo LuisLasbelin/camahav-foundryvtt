@@ -14,11 +14,14 @@
 .message {
   .roll-result {
     border-radius: 15px;
-    border: 5px solid #400080;
+    border: 5px solid $c-m-dark;
+    box-shadow: inset 0px 2px 5px $c-m-dark;
+    background-color: $c-m-white;
     text-align: center;
     h4 {
       margin: 0;
       font-size: var(--font-size-20);
+      font-weight: bold;
     }
   }
   .dice-rolls {
