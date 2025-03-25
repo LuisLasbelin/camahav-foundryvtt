@@ -2,6 +2,9 @@ import {
   onManageActiveEffect,
   prepareActiveEffectCategories,
 } from '../helpers/effects.mjs';
+import {
+  pRoll
+} from '../helpers/roll.mjs'
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -233,6 +236,10 @@ export class CamahavActorSheet extends ActorSheet {
 
     // Handle rolls that supply the formula directly.
     if (dataset.roll) {
+      if (dataset.rollType == 'ability') {
+        pRoll(this.actor, dataset.label, dataset.roll)
+        return
+      }
       let label = dataset.label ? `[ability] ${dataset.label}` : '';
       let roll = new Roll(dataset.roll, this.actor.getRollData());
       roll.toMessage({

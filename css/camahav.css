@@ -10,6 +10,47 @@
   cursor: pointer;
 }
 
+.message .roll-result {
+  border-radius: 15px;
+  border: 5px solid #400080;
+  text-align: center;
+}
+.message .roll-result h4 {
+  margin: 0;
+  font-size: var(--font-size-20);
+}
+.message .dice-rolls {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+.message .dice-rolls .d8-result {
+  position: relative;
+  min-width: 24px;
+  line-height: 24px;
+  float: left;
+  margin-right: 1px;
+  background-image: url("../../../icons/svg/d8-grey.svg");
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  text-align: center;
+  font-size: var(--font-size-16);
+  color: #000;
+  font-weight: bold;
+}
+.message .dice-rolls .success {
+  color: #18520b;
+  filter: sepia(0.5) hue-rotate(60deg);
+}
+.message .dice-rolls .double {
+  color: #100b52;
+  filter: sepia(0.5) hue-rotate(138deg);
+}
+.message .dice-rolls .triple {
+  color: #51520b;
+  filter: sepia(0.5) hue-rotate(360deg);
+}
+
 .grid,
 .grid-2col {
   display: grid;
@@ -364,3 +405,5 @@
 .camahav .effects .item .effect-controls {
   border: none;
 }
+
+/*# sourceMappingURL=camahav.css.map */

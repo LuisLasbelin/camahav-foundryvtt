@@ -12,5 +12,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/camahav/templates/actor/parts/actor-effects.hbs',
     // Item partials
     'systems/camahav/templates/item/parts/item-effects.hbs',
+    // Message partials
+    'systems/camahav/templates/message/rolll.hbs'
   ]);
 };
