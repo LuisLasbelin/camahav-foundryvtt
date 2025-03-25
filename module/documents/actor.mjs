@@ -46,6 +46,22 @@ export class CamahavActor extends Actor {
 
     // Make modifications to data here. For example:
     const systemData = actorData.system;
+
+    // Check if ability values are correct
+    for (const key in actorData.system.abilities) {
+      if(actorData.system.abilities[key].value == 0){
+        var obj = {system:{abilities:{}}}
+        obj.system.abilities[key] = {value:1}
+        console.log(obj)
+        this.update(obj);
+      }
+      if(actorData.system.abilities[key].value < -2){
+        var obj = {system:{abilities:{}}}
+        obj.system.abilities[key] = {value:-2}
+        console.log(obj)
+        this.update(obj);
+      }
+    }
   }
 
   /**
