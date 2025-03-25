@@ -49,14 +49,14 @@ export class CamahavActor extends Actor {
 
     // Check if ability values are correct
     for (const key in actorData.system.abilities) {
-      if(actorData.system.abilities[key].value == 0){
-        var obj = {system:{abilities:{}}}
-        obj.system.abilities[key] = {value:1}
+      if (actorData.system.abilities[key].value == 0) {
+        var obj = { system: { abilities: {} } }
+        obj.system.abilities[key] = { value: 1 }
         this.update(obj);
       }
-      if(actorData.system.abilities[key].value < -2){
-        var obj = {system:{abilities:{}}}
-        obj.system.abilities[key] = {value:-2}
+      if (actorData.system.abilities[key].value < -2) {
+        var obj = { system: { abilities: {} } }
+        obj.system.abilities[key] = { value: -2 }
         this.update(obj);
       }
     }
@@ -64,21 +64,40 @@ export class CamahavActor extends Actor {
     // Calculate the max Vigor and Resolve
     var max_vigor = 0
     for (const key in actorData.system.abilities) {
-      if(["str", "con", "mov", "pre"].includes(key)) {
-        if(actorData.system.abilities[key].value > 0) max_vigor += actorData.system.abilities[key].value
+      if (["str", "con", "mov", "pre"].includes(key)) {
+        if (actorData.system.abilities[key].value > 0) max_vigor += actorData.system.abilities[key].value
       }
     }
-    var obj = {system:{vigor:{max:max_vigor}}}
+    var obj = { system: { vigor: { max: max_vigor } } }
     this.update(obj);
 
     var max_resolve = 0
     for (const key in actorData.system.abilities) {
-      if(["per", "int", "wil", "emp"].includes(key)) {
-        if(actorData.system.abilities[key].value > 0) max_resolve += actorData.system.abilities[key].value
+      if (["per", "int", "wil", "emp"].includes(key)) {
+        if (actorData.system.abilities[key].value > 0) max_resolve += actorData.system.abilities[key].value
       }
     }
-    var obj = {system:{resolve:{max:max_resolve}}}
+    var obj = { system: { resolve: { max: max_resolve } } }
     this.update(obj);
+
+    // Update effects
+    if (actorData.system.status.poison > actorData.system.vigor.value) {
+      if (actorData.effects.search("Poison").length < 1) {
+        return this.createEmbeddedDocuments('ActiveEffect', [
+          {
+            name: game.i18n.format('Poison', {
+              type: game.i18n.localize('CAMAHAV.Status.Poison'),
+            }),
+            img: 'icons/skills/toxins/poison-bottle-corked-fire-green.webp',
+            origin: this.uuid,
+            duration: {turns: 100},
+            disabled: false
+          },
+        ]);
+      }
+    } else if(actorData.effects.search("Poison").length > 0) {
+      actorData.effects.delete(actorData.effects.search("Poison")[0]._id)
+    }
   }
 
   /**
