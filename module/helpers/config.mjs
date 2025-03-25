@@ -47,3 +47,12 @@ CAMAHAV.actionResult =[
 CAMAHAV.pointBuy = [0, 0, 1, 3, 5, 8]
 
 CAMAHAV.Roman = ["Nullus", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
+
+CAMAHAV.Status = {
+  "Poison": { icon: "icons/magic/acid/dissolve-bone-skull.webp", type: "physical"},
+  "Fatigue": { icon: "icons/magic/control/silhouette-grow-shrink-tan.webp", type: "physical"},
+  "Wounded": { icon: "icons/skills/wounds/blood-drip-droplet-red.webp", type: "physical"},
+  "Stunned": { icon: "icons/magic/control/hypnosis-mesmerism-eye.webp", type: "mental"},
+  "Agitated": { icon: "icons/skills/social/intimidation-impressing.webp", type: "mental"},
+  "Cursed": { icon: "icons/magic/control/fear-fright-monster-grin-purple-blue.webp", type: "mental"}
+}

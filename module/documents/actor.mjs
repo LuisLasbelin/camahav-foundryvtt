@@ -80,24 +80,51 @@ export class CamahavActor extends Actor {
     var obj = { system: { resolve: { max: max_resolve } } }
     this.update(obj);
 
-    // Update effects
-    if (actorData.system.status.poison > actorData.system.vigor.value) {
-      if (actorData.effects.search("Poison").length < 1) {
-        return this.createEmbeddedDocuments('ActiveEffect', [
+    // if there is a effect missing for status, create it
+    for (let i = 0; i < CONFIG.CAMAHAV.Status.length; i++) {
+      console.log(actorData.effects.find((ef) => ef.name == CONFIG.CAMAHAV.Status[i].name))
+      if(!actorData.effects.find((ef) => ef.name == CONFIG.CAMAHAV.Status[i].name)) {
+        this.createEmbeddedDocuments('ActiveEffect', [
           {
-            name: game.i18n.format('Poison', {
-              type: game.i18n.localize('CAMAHAV.Status.Poison'),
-            }),
-            img: 'icons/skills/toxins/poison-bottle-corked-fire-green.webp',
+            name: CONFIG.CAMAHAV.Status[i].name,
+            icon: CONFIG.CAMAHAV.Status[i].icon,
             origin: this.uuid,
-            duration: {turns: 100},
-            disabled: false
+            'duration.rounds': 1,
+            disabled: true,
           },
         ]);
       }
-    } else if(actorData.effects.search("Poison").length > 0) {
-      actorData.effects.delete(actorData.effects.search("Poison")[0]._id)
     }
+
+    // Update effects
+    for(var status in CONFIG.CAMAHAV.Status) {
+      // If there is no effect with the name, create it.
+      if(!actorData.effects.find((ef) => ef.name == status)) {
+        return this.createEmbeddedDocuments('ActiveEffect', [
+          {
+            name: status,
+            icon: CONFIG.CAMAHAV.Status[status].icon,
+            origin: this.uuid,
+            'duration.rounds': 1,
+            disabled: false,
+          },
+        ]);
+      }
+      if(CONFIG.CAMAHAV.Status[status].type == "physical") {
+        if (actorData.system.status[status.toLowerCase()] > actorData.system.vigor.value) {
+          actorData.effects.find((ef) => ef.name == status).update({disabled: false});
+        } else if(actorData.effects.search(status).length > 0) {
+          actorData.effects.find((ef) => ef.name == status).update({disabled: true});
+        }
+      } // physical
+      if(CONFIG.CAMAHAV.Status[status].type == "mental") {
+        if (actorData.system.status[status.toLowerCase()] > actorData.system.resolve.value) {
+          actorData.effects.find((ef) => ef.name == status).update({disabled: false});
+        } else if(actorData.effects.search(status).length > 0) {
+          actorData.effects.find((ef) => ef.name == status).update({disabled: true});
+        }
+      } // mental
+    } // for
   }
 
   /**
