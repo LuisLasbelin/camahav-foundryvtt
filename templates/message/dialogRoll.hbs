@@ -1,0 +1,12 @@
+<form id="roll-form" class="message flexcol">
+    <h2 id="label">{{label}}</h2>
+    <ol id="status" class="dice-rolls">
+        {{#each status}}
+        <li value="{{this.label}}"><img src="{{this.icon}}"/>{{this.label}}</li>
+        {{/each}}
+    </ol>
+    <div class="ability flexrow flex-group-center">
+        <label for="roll" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.RollValue'}}</label>
+        <input id="dice" type="text" name="roll" value="{{roll}}" data-dtype="Number"/>
+    </div>
+</form>

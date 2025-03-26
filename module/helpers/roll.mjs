@@ -1,20 +1,34 @@
+export async function rollFromHtml(html, actor) {
+    const dice = document.getElementById("dice").value;
+    const label = document.getElementById("label").innerHTML;
+    const status = document.getElementById("status").children;
+
+    var status_text = []
+
+    for (const key in status) {
+        status_text.push(status[key].value)
+    }
+
+    pRoll(actor, label, dice, status_text)
+}
+
 /**
  * Custom function to make a Poisson roll of d8 dice.
  * @param {Number} dice number of dice to be rolled.
  * @param {Number} target minimum number to get a single success.
  * @param {Number} difficulty amount of successes needed.
  */
-export async function pRoll(_actor, _label = "CAMAHAV.ChanceRoll", _dice = 2, _penalties = [], _target = 6, _difficulty = 3) {
+export async function pRoll(_actor, _label = "CAMAHAV.ChanceRoll", _dice = 2, _status = [], _target = 4, _difficulty = 3) {
 
     let r = new Roll();
     var results = {}
 
     // If the penalty equals the dice, remove one extra dice to avoid getting into 0.
-    if(_dice == _penalties.length) {
+    if(_dice == _status.length) {
         _dice -= 1
     }
 
-    _dice -= _penalties.length * 2
+    _dice -= _status.length * 2
 
     if (_dice <= -2) {
         r = new Roll(`1d8`);
@@ -66,7 +80,7 @@ export async function pRoll(_actor, _label = "CAMAHAV.ChanceRoll", _dice = 2, _p
 
     const content = await renderTemplate('systems/camahav/templates/message/roll.hbs', {
         total: CONFIG.CAMAHAV.Roman[r._total],
-        penalties: _penalties,
+        status: _status,
         results: results,
         performance: game.i18n.localize(CONFIG.CAMAHAV.actionResult[r._total]),
         actor: _actor

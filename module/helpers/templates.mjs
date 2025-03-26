@@ -13,6 +13,7 @@ export const preloadHandlebarsTemplates = async function () {
     // Item partials
     'systems/camahav/templates/item/parts/item-effects.hbs',
     // Message partials
-    'systems/camahav/templates/message/rolll.hbs'
+    'systems/camahav/templates/message/roll.hbs',
+    'systems/camahav/templates/message/dialogRoll.hbs'
   ]);
 };

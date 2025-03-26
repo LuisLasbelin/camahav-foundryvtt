@@ -3,7 +3,8 @@ import {
   prepareActiveEffectCategories,
 } from '../helpers/effects.mjs';
 import {
-  pRoll
+  pRoll,
+  rollFromHtml
 } from '../helpers/roll.mjs'
 
 /**
@@ -84,8 +85,8 @@ export class CamahavActorSheet extends ActorSheet {
     // Handle ability scores.
     for (let [k, v] of Object.entries(context.system.abilities)) {
       v.label = game.i18n.localize(CONFIG.CAMAHAV.abilities[k]) ?? k;
-      if(v.value > 0) context.pointBuy += CONFIG.CAMAHAV.pointBuy[v.value];
-      else context.pointBuy  = v.value;
+      if (v.value > 0) context.pointBuy += CONFIG.CAMAHAV.pointBuy[v.value];
+      else context.pointBuy = v.value;
     }
   }
 
@@ -241,15 +242,31 @@ export class CamahavActorSheet extends ActorSheet {
       var status = []
       if (dataset.rollType == 'ability') {
         // Check status effects
-        if(["str", "con"].includes(dataset.ability) && this.actor.getRollData().status.poison > this.actor.getRollData().vigor.value) status.push(game.i18m.localize("CAMAHAV.Status.Poison"))
-        if(["mov", "pre"].includes(dataset.ability) && this.actor.getRollData().status.fatigue > this.actor.getRollData().vigor.value) status.push(game.i18m.localize("CAMAHAV.Status.Fatigue"))
-        if(["str", "con", "mov", "pre"].includes(dataset.ability) && this.actor.getRollData().status.wounded > this.actor.getRollData().vigor.value) status.push(game.i18m.localize("CAMAHAV.Status.Wounded"))
-        if(["per", "int"].includes(dataset.ability) && this.actor.getRollData().stunned.stunned > this.actor.getRollData().resolve.value) status.push(game.i18m.localize("CAMAHAV.Status.Stunned"))
-        if(["wil", "emp"].includes(dataset.ability) && this.actor.getRollData().agitated.agitated > this.actor.getRollData().resolve.value) status.push(game.i18m.localize("CAMAHAV.Status.Agitated"))
-        if(["per", "int", "wil", "emp"].includes(dataset.ability) && this.actor.getRollData().status.cursed > this.actor.getRollData().resolve.value) status.push(game.i18m.localize("CAMAHAV.Status.Cursed"))
+        if (["str", "con"].includes(dataset.ability) && this.actor.getRollData().status.poison > this.actor.getRollData().vigor.value) status.push(CONFIG.CAMAHAV.Status.poison)
+        if (["mov", "pre"].includes(dataset.ability) && this.actor.getRollData().status.fatigue > this.actor.getRollData().vigor.value) status.push(CONFIG.CAMAHAV.Status.fatigue)
+        if (["str", "con", "mov", "pre"].includes(dataset.ability) && this.actor.getRollData().status.wounded > this.actor.getRollData().vigor.value) status.push(CONFIG.CAMAHAV.Status.wounded)
+        if (["per", "int"].includes(dataset.ability) && this.actor.getRollData().status.stunned > this.actor.getRollData().resolve.value) status.push(CONFIG.CAMAHAV.Status.stunned)
+        if (["wil", "emp"].includes(dataset.ability) && this.actor.getRollData().status.agitated > this.actor.getRollData().resolve.value) status.push(CONFIG.CAMAHAV.Status.agitated)
+        if (["per", "int", "wil", "emp"].includes(dataset.ability) && this.actor.getRollData().status.cursed > this.actor.getRollData().resolve.value) status.push(CONFIG.CAMAHAV.Status.cursed)
 
-        // Roll with Poisson d8
-        pRoll(this.actor, dataset.label, dataset.roll, status)
+        renderTemplate('systems/camahav/templates/message/dialogRoll.hbs', {
+          actor: this.actor,
+          label: dataset.label,
+          roll: dataset.roll,
+          status: status
+        }).then((res) => {
+          new Dialog({
+            title: dataset.label,
+            content: res,
+            buttons: {
+              button1: {
+                label: "Roll",
+                callback: (html) => rollFromHtml(html),
+                icon: `<i class="fas fa-check"></i>`
+              }
+            }
+          }).render(true);
+        });
         return
       }
       let label = dataset.label ? `[ability] ${dataset.label}` : '';
