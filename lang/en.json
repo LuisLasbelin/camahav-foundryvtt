@@ -1,14 +1,38 @@
 {
   "CAMAHAV": {
     "Ability": {
-      "Str": { "long": "Strength", "abbr": "str" },
-      "Con": { "long": "Constitution", "abbr": "con" },
-      "Mov": { "long": "Movement", "abbr": "mov" },
-      "Pre": { "long": "Precision", "abbr": "pre" },
-      "Per": { "long": "Perception", "abbr": "per" },
-      "Int": { "long": "Intellect", "abbr": "int" },
-      "Wil": { "long": "Will", "abbr": "wil" },
-      "Emp": { "long": "Empathy", "abbr": "emp" }
+      "Str": {
+        "long": "Strength",
+        "abbr": "str"
+      },
+      "Con": {
+        "long": "Constitution",
+        "abbr": "con"
+      },
+      "Mov": {
+        "long": "Movement",
+        "abbr": "mov"
+      },
+      "Pre": {
+        "long": "Precision",
+        "abbr": "pre"
+      },
+      "Per": {
+        "long": "Perception",
+        "abbr": "per"
+      },
+      "Int": {
+        "long": "Intellect",
+        "abbr": "int"
+      },
+      "Wil": {
+        "long": "Will",
+        "abbr": "wil"
+      },
+      "Emp": {
+        "long": "Empathy",
+        "abbr": "emp"
+      }
     },
     "Physical": "Physical",
     "Mental": "Mental",
@@ -26,6 +50,7 @@
       "Heroic": "Of great renown, heroic, once-in-a-lifetime.",
       "Legendary": "Legendary! Will change the world."
     },
+    "RollValue": "Dice to roll",
     "StatusEffects": "Status effects",
     "Status": {
       "Poison": "Poison",
@@ -53,7 +78,6 @@
       "Inactive": "Inactive Effects"
     }
   },
-
   "TYPES": {
     "Actor": {
       "character": "Character",

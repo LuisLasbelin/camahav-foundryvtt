@@ -49,10 +49,10 @@ CAMAHAV.pointBuy = [0, 0, 1, 3, 5, 8]
 CAMAHAV.Roman = ["Nullus", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
 
 CAMAHAV.Status = {
-  "poison": { icon: "icons/magic/acid/dissolve-bone-skull.webp", type: "physical", name: "Poison"},
-  "fatigue": { icon: "icons/magic/control/silhouette-grow-shrink-tan.webp", type: "physical", name: "Fatigue"},
-  "wounded": { icon: "icons/skills/wounds/blood-drip-droplet-red.webp", type: "physical", name: "Wounded"},
-  "stunned": { icon: "icons/magic/control/hypnosis-mesmerism-eye.webp", type: "mental", name: "Stunned"},
-  "agitated": { icon: "icons/skills/social/intimidation-impressing.webp", type: "mental", name: "Agitated"},
-  "cursed": { icon: "icons/magic/control/fear-fright-monster-grin-purple-blue.webp", type: "mental", name: "Cursed"}
+  "poison": { icon: "icons/magic/acid/dissolve-bone-skull.webp", type: "physical", label: "CAMAHAV.Status.Poison", id: "poison"},
+  "fatigue": { icon: "icons/magic/control/silhouette-grow-shrink-tan.webp", type: "physical", label: "CAMAHAV.Status.Fatigue", id: "fatigue"},
+  "wounded": { icon: "icons/skills/wounds/blood-drip-droplet-red.webp", type: "physical", label: "CAMAHAV.Status.Wounded", id: "wounded"},
+  "stunned": { icon: "icons/magic/control/hypnosis-mesmerism-eye.webp", type: "mental", label: "CAMAHAV.Status.Stunned", id: "stunned"},
+  "agitated": { icon: "icons/skills/social/intimidation-impressing.webp", type: "mental", label: "CAMAHAV.Status.Agitated", id: "agitated"},
+  "cursed": { icon: "icons/magic/control/fear-fright-monster-grin-purple-blue.webp", type: "mental", label: "CAMAHAV.Status.Cursed", id: "cursed"}
 }

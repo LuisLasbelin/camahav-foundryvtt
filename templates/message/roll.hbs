@@ -1,15 +1,15 @@
 <div class="message flexcol">
     <ol class="dice-rolls">
         {{#each status}}
-        <li>{{this}}</li>
+        <li class="status-label"><img width="32px" src="{{this.icon}}" />{{localize this.label}}</li>
         {{/each}}
     </ol>
     <ol class="dice-rolls">
         {{#each results}}
-            {{#if this.not}}    <li class="d8-result">{{this.result}}</li>{{/if}}
-            {{#if this.success}}<li class="d8-result success">{{this.result}}</li>{{/if}}
-            {{#if this.double}} <li class="d8-result double">{{this.result}}</li>{{/if}}
-            {{#if this.triple}} <li class="d8-result triple">{{this.result}}</li>{{/if}}
+        {{#if this.not}} <li class="d8-result">{{this.result}}</li>{{/if}}
+        {{#if this.success}}<li class="d8-result success">{{this.result}}</li>{{/if}}
+        {{#if this.double}} <li class="d8-result double">{{this.result}}</li>{{/if}}
+        {{#if this.triple}} <li class="d8-result triple">{{this.result}}</li>{{/if}}
         {{/each}}
     </ol>
     <div class="flexcol flex-center roll-result">

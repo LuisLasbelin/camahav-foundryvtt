@@ -1,15 +1,15 @@
 export async function rollFromHtml(html, actor) {
     const dice = document.getElementById("dice").value;
     const label = document.getElementById("label").innerHTML;
-    const status = document.getElementById("status").children;
+    const status = document.getElementsByClassName("status");
 
-    var status_text = []
+    var status_obj = []
 
-    for (const key in status) {
-        status_text.push(status[key].value)
+    for (const element of status) {
+        status_obj.push(CONFIG.CAMAHAV.Status[element.value])
     }
 
-    pRoll(actor, label, dice, status_text)
+    pRoll(actor, label, dice, status_obj)
 }
 
 /**
@@ -24,11 +24,11 @@ export async function pRoll(_actor, _label = "CAMAHAV.ChanceRoll", _dice = 2, _s
     var results = {}
 
     // If the penalty equals the dice, remove one extra dice to avoid getting into 0.
-    if(_dice == _status.length) {
+    if (_dice == _status.length) {
         _dice -= 1
     }
 
-    _dice -= _status.length * 2
+    _dice -= _status.length
 
     if (_dice <= -2) {
         r = new Roll(`1d8`);
