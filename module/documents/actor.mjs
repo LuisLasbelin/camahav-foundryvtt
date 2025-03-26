@@ -80,48 +80,21 @@ export class CamahavActor extends Actor {
     var obj = { system: { resolve: { max: max_resolve } } }
     this.update(obj);
 
-    // if there is a effect missing for status, create it
-    for (let i = 0; i < CONFIG.CAMAHAV.Status.length; i++) {
-      console.log(actorData.effects.find((ef) => ef.name == CONFIG.CAMAHAV.Status[i].name))
-      if(!actorData.effects.find((ef) => ef.name == CONFIG.CAMAHAV.Status[i].name)) {
-        this.createEmbeddedDocuments('ActiveEffect', [
-          {
-            name: CONFIG.CAMAHAV.Status[i].name,
-            icon: CONFIG.CAMAHAV.Status[i].icon,
-            origin: this.uuid,
-            'duration.rounds': 1,
-            disabled: true,
-          },
-        ]);
-      }
-    }
-
+    
     // Update effects
-    for(var status in CONFIG.CAMAHAV.Status) {
-      // If there is no effect with the name, create it.
-      if(!actorData.effects.find((ef) => ef.name == status)) {
-        return this.createEmbeddedDocuments('ActiveEffect', [
-          {
-            name: status,
-            icon: CONFIG.CAMAHAV.Status[status].icon,
-            origin: this.uuid,
-            'duration.rounds': 1,
-            disabled: false,
-          },
-        ]);
-      }
-      if(CONFIG.CAMAHAV.Status[status].type == "physical") {
+    for (var status in CONFIG.CAMAHAV.Status) {
+      if (CONFIG.CAMAHAV.Status[status].type == "physical") {
         if (actorData.system.status[status.toLowerCase()] > actorData.system.vigor.value) {
-          actorData.effects.find((ef) => ef.name == status).update({disabled: false});
-        } else if(actorData.effects.search(status).length > 0) {
-          actorData.effects.find((ef) => ef.name == status).update({disabled: true});
+          actorData.effects.find((ef) => ef.name == status).update({ disabled: false });
+        } else if (actorData.effects.search(status).length > 0) {
+          actorData.effects.find((ef) => ef.name == status).update({ disabled: true });
         }
       } // physical
-      if(CONFIG.CAMAHAV.Status[status].type == "mental") {
+      if (CONFIG.CAMAHAV.Status[status].type == "mental") {
         if (actorData.system.status[status.toLowerCase()] > actorData.system.resolve.value) {
-          actorData.effects.find((ef) => ef.name == status).update({disabled: false});
-        } else if(actorData.effects.search(status).length > 0) {
-          actorData.effects.find((ef) => ef.name == status).update({disabled: true});
+          actorData.effects.find((ef) => ef.name == status).update({ disabled: false });
+        } else if (actorData.effects.search(status).length > 0) {
+          actorData.effects.find((ef) => ef.name == status).update({ disabled: true });
         }
       } // mental
     } // for

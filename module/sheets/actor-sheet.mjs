@@ -82,6 +82,7 @@ export class CamahavActorSheet extends ActorSheet {
    * @return {undefined}
    */
   _prepareCharacterData(context) {
+    context.pointBuy = 0
     // Handle ability scores.
     for (let [k, v] of Object.entries(context.system.abilities)) {
       v.label = game.i18n.localize(CONFIG.CAMAHAV.abilities[k]) ?? k;
