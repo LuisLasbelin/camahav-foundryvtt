@@ -79,25 +79,6 @@ export class CamahavActor extends Actor {
     }
     var obj = { system: { resolve: { max: max_resolve } } }
     this.update(obj);
-
-    
-    // Update effects
-    for (var status in CONFIG.CAMAHAV.Status) {
-      if (CONFIG.CAMAHAV.Status[status].type == "physical") {
-        if (actorData.system.status[status.toLowerCase()] > actorData.system.vigor.value) {
-          actorData.effects.find((ef) => ef.name == status).update({ disabled: false });
-        } else if (actorData.effects.search(status).length > 0) {
-          actorData.effects.find((ef) => ef.name == status).update({ disabled: true });
-        }
-      } // physical
-      if (CONFIG.CAMAHAV.Status[status].type == "mental") {
-        if (actorData.system.status[status.toLowerCase()] > actorData.system.resolve.value) {
-          actorData.effects.find((ef) => ef.name == status).update({ disabled: false });
-        } else if (actorData.effects.search(status).length > 0) {
-          actorData.effects.find((ef) => ef.name == status).update({ disabled: true });
-        }
-      } // mental
-    } // for
   }
 
   /**

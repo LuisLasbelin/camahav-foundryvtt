@@ -320,10 +320,23 @@
   background-repeat: no-repeat;
   background-position-x: right;
 }
+.camahav .ability {
+  padding-top: 5px;
+  border: 2px solid #443627;
+  border-radius: 5px;
+}
 .camahav .ability input {
   font-size: var(--font-size-16);
   width: 32px;
   margin: 6px;
+}
+.camahav .status {
+  padding-top: 5px;
+  border: 2px solid #443627;
+  border-radius: 5px;
+}
+.camahav .status.active {
+  box-shadow: inset 0px 0px 5px 2px red;
 }
 .camahav .resource-label {
   font-weight: bold;

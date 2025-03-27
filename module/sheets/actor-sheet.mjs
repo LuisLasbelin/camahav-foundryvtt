@@ -89,6 +89,19 @@ export class CamahavActorSheet extends ActorSheet {
       if (v.value > 0) context.pointBuy += CONFIG.CAMAHAV.pointBuy[v.value];
       else context.pointBuy = v.value;
     }
+
+    context.status = {}
+    for (let [k, v] of Object.entries(context.system.status)) {
+      // add icon data
+      v.config = CONFIG.CAMAHAV.Status[k]
+      
+      if(v.type == "physical" && v.value > context.system.vigor.value) {
+        context.status[k] = true
+      }
+      if(v.type == "mental" && v.value > context.system.resolve.value) {
+        context.status[k] = true
+      }
+    }
   }
 
   /**

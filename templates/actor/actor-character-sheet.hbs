@@ -113,31 +113,31 @@
           </div>
           <h3>{{localize 'CAMAHAV.StatusEffects'}}</h3>
           <div class="grid grid-4col">
-            <div class="ability flexcol flex-group-center">
-              <label for="system.status.poison" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Poison'}}</label>
-              <input type="text" name="system.status.poison" value="{{system.status.poison}}" data-dtype="Number"/>
+            <div class="ability flexcol flex-group-center status {{#if status.poison}}active{{/if}}">
+              <label for="system.status.poison.value" class="resource-label rollable flexlarge align-left ">{{localize 'CAMAHAV.Status.Poison'}}</label>
+              <input type="text" name="system.status.poison.value" value="{{system.status.poison.value}}" data-dtype="Number"/>
             </div>
-            <div class="ability flexcol flex-group-center">
-              <label for="system.status.fatigue" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Fatigue'}}</label>
-              <input type="text" name="system.status.fatigue" value="{{system.status.fatigue}}" data-dtype="Number"/>
+            <div class="ability flexcol flex-group-center status {{#if status.fatigue}}active{{/if}}">
+              <label for="system.status.fatigue.value" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Fatigue'}}</label>
+              <input type="text" name="system.status.fatigue.value" value="{{system.status.fatigue.value}}" data-dtype="Number"/>
             </div>
-            <div class="ability flexcol flex-group-center">
-              <label for="system.status.stunned" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Stunned'}}</label>
-              <input type="text" name="system.status.stunned" value="{{system.status.stunned}}" data-dtype="Number"/>
+            <div class="ability flexcol flex-group-center status {{#if status.stunned}}active{{/if}}">
+              <label for="system.status.stunned.value" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Stunned'}}</label>
+              <input type="text" name="system.status.stunned.value" value="{{system.status.stunned.value}}" data-dtype="Number"/>
             </div>
-            <div class="ability flexcol flex-group-center">
-              <label for="system.status.agitated" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Agitated'}}</label>
-              <input type="text" name="system.status.agitated" value="{{system.status.agitated}}" data-dtype="Number"/>
+            <div class="ability flexcol flex-group-center status {{#if status.agitated}}active{{/if}}">
+              <label for="system.status.agitated.value" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Agitated'}}</label>
+              <input type="text" name="system.status.agitated.value" value="{{system.status.agitated.value}}" data-dtype="Number"/>
             </div>
           </div>
           <div class="grid grid-2col">
-             <div class="ability flexcol flex-group-center">
-              <label for="system.status.wounded" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Wounded'}}</label>
-              <input type="text" name="system.status.wounded" value="{{system.status.wounded}}" data-dtype="Number"/>
+             <div class="ability flexcol flex-group-center status {{#if status.wounded}}active{{/if}}">
+              <label for="system.status.wounded.value" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Wounded'}}</label>
+              <input type="text" name="system.status.wounded.value" value="{{system.status.wounded.value}}" data-dtype="Number"/>
             </div>
-            <div class="ability flexcol flex-group-center">
-              <label for="system.status.cursed" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Cursed'}}</label>
-              <input type="text" name="system.status.cursed" value="{{system.status.cursed}}" data-dtype="Number"/>
+            <div class="ability flexcol flex-group-center status {{#if status.cursed}}active{{/if}}">
+              <label for="system.status.cursed.value" class="resource-label rollable flexlarge align-left">{{localize 'CAMAHAV.Status.Cursed'}}</label>
+              <input type="text" name="system.status.cursed.value" value="{{system.status.cursed.value}}" data-dtype="Number"/>
             </div>
           </div>
           <span>P: {{pointBuy}}</span>
