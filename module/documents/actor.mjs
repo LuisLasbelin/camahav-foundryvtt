@@ -1,3 +1,7 @@
+import {
+  rollFromHtml
+} from '../helpers/roll.mjs'
+
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -133,5 +137,37 @@ export class CamahavActor extends Actor {
     if (this.type !== 'npc') return;
 
     // Process additional NPC data here.
+  }
+
+  roll(ability) {
+    const data = this.getRollData()
+    var status = []
+    // Check status effects
+    if (["str", "con"].includes(ability) && data.status.poison.value > data.vigor.value) status.push(CONFIG.CAMAHAV.Status.poison)
+    if (["mov", "pre"].includes(ability) && data.status.fatigue.value > data.vigor.value) status.push(CONFIG.CAMAHAV.Status.fatigue)
+    if (["str", "con", "mov", "pre"].includes(ability) && data.status.wounded.value > data.vigor.value) status.push(CONFIG.CAMAHAV.Status.wounded)
+    if (["per", "int"].includes(ability) && data.status.stunned.value > data.resolve.value) status.push(CONFIG.CAMAHAV.Status.stunned)
+    if (["wil", "emp"].includes(ability) && data.status.agitated.value > data.resolve.value) status.push(CONFIG.CAMAHAV.Status.agitated)
+    if (["per", "int", "wil", "emp"].includes(ability) && data.status.cursed.value > data.resolve.value) status.push(CONFIG.CAMAHAV.Status.cursed)
+
+    renderTemplate('systems/camahav/templates/message/dialogRoll.hbs', {
+      actor: this,
+      label: game.i18n.localize(CONFIG.CAMAHAV.abilities[ability]),
+      roll: data.abilities[ability].value,
+      status: status
+    }).then((res) => {
+      new Dialog({
+        title: game.i18n.localize(CONFIG.CAMAHAV.abilities[ability]),
+        content: res,
+        buttons: {
+          button1: {
+            label: "Roll",
+            callback: (html) => rollFromHtml(html),
+            icon: `<i class="fas fa-check"></i>`
+          }
+        }
+      }).render(true);
+    });
+    return
   }
 }

@@ -1,7 +1,7 @@
 export async function rollFromHtml(html, actor) {
-    const dice = document.getElementById("dice").value;
-    const label = document.getElementById("label").innerHTML;
-    const status = document.getElementsByClassName("status");
+    const dice = html.find("#dice").value;
+    const label = html.find("#label").innerHTML;
+    const status = html.find(".status");
 
     var status_obj = []
 

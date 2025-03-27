@@ -2,10 +2,6 @@ import {
   onManageActiveEffect,
   prepareActiveEffectCategories,
 } from '../helpers/effects.mjs';
-import {
-  pRoll,
-  rollFromHtml
-} from '../helpers/roll.mjs'
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -253,35 +249,8 @@ export class CamahavActorSheet extends ActorSheet {
 
     // Handle rolls that supply the formula directly.
     if (dataset.roll) {
-      var status = []
       if (dataset.rollType == 'ability') {
-        // Check status effects
-        if (["str", "con"].includes(dataset.ability) && this.actor.getRollData().status.poison > this.actor.getRollData().vigor.value) status.push(CONFIG.CAMAHAV.Status.poison)
-        if (["mov", "pre"].includes(dataset.ability) && this.actor.getRollData().status.fatigue > this.actor.getRollData().vigor.value) status.push(CONFIG.CAMAHAV.Status.fatigue)
-        if (["str", "con", "mov", "pre"].includes(dataset.ability) && this.actor.getRollData().status.wounded > this.actor.getRollData().vigor.value) status.push(CONFIG.CAMAHAV.Status.wounded)
-        if (["per", "int"].includes(dataset.ability) && this.actor.getRollData().status.stunned > this.actor.getRollData().resolve.value) status.push(CONFIG.CAMAHAV.Status.stunned)
-        if (["wil", "emp"].includes(dataset.ability) && this.actor.getRollData().status.agitated > this.actor.getRollData().resolve.value) status.push(CONFIG.CAMAHAV.Status.agitated)
-        if (["per", "int", "wil", "emp"].includes(dataset.ability) && this.actor.getRollData().status.cursed > this.actor.getRollData().resolve.value) status.push(CONFIG.CAMAHAV.Status.cursed)
-
-        renderTemplate('systems/camahav/templates/message/dialogRoll.hbs', {
-          actor: this.actor,
-          label: dataset.label,
-          roll: dataset.roll,
-          status: status
-        }).then((res) => {
-          new Dialog({
-            title: dataset.label,
-            content: res,
-            buttons: {
-              button1: {
-                label: "Roll",
-                callback: (html) => rollFromHtml(html),
-                icon: `<i class="fas fa-check"></i>`
-              }
-            }
-          }).render(true);
-        });
-        return
+        return this.actor.roll(dataset.ability)
       }
       let label = dataset.label ? `[ability] ${dataset.label}` : '';
       let roll = new Roll(dataset.roll, this.actor.getRollData());
