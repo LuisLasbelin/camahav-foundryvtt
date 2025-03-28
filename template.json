@@ -96,6 +96,8 @@
   },
   "Item": {
     "types": [
+      "class",
+      "skill",
       "item",
       "feature",
       "spell"
@@ -105,13 +107,27 @@
         "description": ""
       }
     },
+    "class": {
+      "templates": [
+        "base"
+      ],
+      "skills": [],
+      "notes": []
+    },
+    "skill": {
+      "templates": [
+        "base"
+      ],
+      "value": 0,
+      "abilities": []
+    },
     "item": {
       "templates": [
         "base"
       ],
       "quantity": 1,
       "weight": 0,
-      "formula": "d20 + @str.mod + ceil(@lvl / 2)"
+      "formula": "2"
     },
     "feature": {
       "templates": [

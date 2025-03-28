@@ -242,6 +242,10 @@
   justify-content: space-between;
 }
 
+.flexmid {
+  flex: 1.5;
+}
+
 .flexlarge {
   flex: 2;
 }
@@ -310,15 +314,21 @@
 .camahav .tox .tox-edit-area {
   padding: 0 8px;
 }
-.camahav .mental-title {
-  background-image: url(../assets/stars.png);
+.camahav .title {
   background-repeat: no-repeat;
-  background-position-x: right;
+  background-position-x: left;
+  color: antiquewhite;
+  border: none;
+  padding-left: 5px;
 }
-.camahav .physical-title {
+.camahav .title.mental {
+  background-image: url(../assets/stars.png);
+}
+.camahav .title.physical {
   background-image: url(../assets/physical.png);
-  background-repeat: no-repeat;
-  background-position-x: right;
+}
+.camahav .title.classes {
+  background-image: url(../assets/classes.png);
 }
 .camahav .ability {
   padding-top: 5px;
@@ -389,7 +399,6 @@
 }
 .camahav .items-list .item-controls {
   display: flex;
-  flex: 0 0 100px;
   justify-content: flex-end;
 }
 .camahav .items-list .item-controls a {
@@ -440,6 +449,9 @@
 }
 .camahav .item-formula {
   flex: 0 0 200px;
+  padding: 0 8px;
+}
+.camahav .item-value {
   padding: 0 8px;
 }
 .camahav .effects .item .effect-source,

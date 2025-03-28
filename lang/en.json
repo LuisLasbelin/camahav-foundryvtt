@@ -76,7 +76,15 @@
       "Temporary": "Temporary Effects",
       "Passive": "Passive Effects",
       "Inactive": "Inactive Effects"
-    }
+    },
+    "Weight": "Weight",
+    "Quantity": "Quantity",
+    "Description": "Description",
+    "Attributes": "Attributes",
+    "Classes": "Classes",
+    "Skills": "Skills",
+    "Class": "Class",
+    "Skill": "Skill"
   },
   "TYPES": {
     "Actor": {
@@ -84,6 +92,8 @@
       "npc": "NPC"
     },
     "Item": {
+      "class": "Class",
+      "skill": "Skill",
       "item": "Item",
       "feature": "Feature",
       "spell": "Spell"

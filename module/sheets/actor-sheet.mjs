@@ -12,8 +12,8 @@ export class CamahavActorSheet extends ActorSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ['camahav', 'sheet', 'actor'],
-      width: 600,
-      height: 600,
+      width: 700,
+      height: 700,
       tabs: [
         {
           navSelector: '.sheet-tabs',
@@ -111,8 +111,9 @@ export class CamahavActorSheet extends ActorSheet {
     // Initialize containers.
     const gear = [];
     const features = [];
+    const classes = [];
+    const skills = [];
     const spells = {
-      0: [],
       1: [],
       2: [],
       3: [],
@@ -120,8 +121,7 @@ export class CamahavActorSheet extends ActorSheet {
       5: [],
       6: [],
       7: [],
-      8: [],
-      9: [],
+      8: []
     };
 
     // Iterate through items, allocating to containers
@@ -135,6 +135,14 @@ export class CamahavActorSheet extends ActorSheet {
       else if (i.type === 'feature') {
         features.push(i);
       }
+      // Append to classes.
+      else if (i.type === 'class') {
+        classes.push(i);
+      }
+      // Append to skills.
+      else if (i.type === 'skill') {
+        skills.push(i);
+      }
       // Append to spells.
       else if (i.type === 'spell') {
         if (i.system.spellLevel != undefined) {
@@ -146,6 +154,8 @@ export class CamahavActorSheet extends ActorSheet {
     // Assign and return
     context.gear = gear;
     context.features = features;
+    context.classes = classes;
+    context.skills = skills;
     context.spells = spells;
   }
 
@@ -243,6 +253,11 @@ export class CamahavActorSheet extends ActorSheet {
       if (dataset.rollType == 'item') {
         const itemId = element.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
+        if (item) return item.roll();
+      }
+      if (dataset.rollType == 'skill') {
+        const itemId = element.closest('.skill').dataset.itemId;
+        const item = this.actor.skills.get(itemId);
         if (item) return item.roll();
       }
     }
