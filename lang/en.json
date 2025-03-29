@@ -84,7 +84,10 @@
     "Classes": "Classes",
     "Skills": "Skills",
     "Class": "Class",
-    "Skill": "Skill"
+    "Skill": "Skill",
+    "FreeSuccesses": "Free successes",
+    "Roll": "Make roll",
+    "SafeRoll": "Safe roll"
   },
   "TYPES": {
     "Actor": {

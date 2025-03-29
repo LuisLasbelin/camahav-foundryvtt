@@ -1,6 +1,6 @@
 <form id="roll-form" class="message flexcol">
-    <h2 style="display: none;" id="label">{{label}}</h2>
-    <ol id="status" class="dice-rolls">
+    <h2>{{label}}</h2>
+    <ol class="dice-rolls">
         {{#each status}}
         <li class="status-label">
             <img width="32px" src="{{this.icon}}" />{{localize this.label}}
@@ -9,12 +9,24 @@
         {{/each}}
     </ol>
     <div class="grid grid-2col">
-        <div class="ability flexrow flex-group-center">
+        <div>
             {{#each rolls}}
-            <label for="roll" class="resource-label flexlarge align-left">{{@key}}</label>
-            <input id="dice" type="text" name="rolls.{{@key}}" value="{{this}}" data-dtype="Number" />
+            <div class="ability flexrow flex-group-center">
+
+                <label for="{{this.type}}" class="resource-label flexlarge align-left">{{this.label}}</label>
+                <input type="text" name="{{this.type}}" value="{{this.value}}" data-dtype="Number" />
+            </div>
             {{/each}}
         </div>
+        <div class="ability flexrow flex-group-center">
+            <label for="free_successes" class="resource-label flexlarge align-left">{{localize
+                "CAMAHAV.FreeSuccesses"}}</label>
+            <input type="text" name="free_successes" value="{{free_successes}}" data-dtype="Number" />
+
+        </div>
+        <div class="ability flexrow flex-group-center"></div>
+        <label for="safe" class="resource-label flexlarge align-left">{{localize "CAMAHAV.SafeRoll"}}</label>
+        <input type="checkbox" name="safe" />
     </div>
     <button type="submit">{{localize "CAMAHAV.Roll"}}</button>
 </form>

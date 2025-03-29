@@ -68,18 +68,15 @@ export class CamahavItem extends Item {
 
   async rollSkill() {
     const item = this;
-    var status = []
     var ability = "str"
-
     const rollData = this.getRollData();
+
     for (const key in rollData.abilities) {
       if (rollData.abilities[key].value > 0) {
-        // Join the two arrays to get only one
-        status.push.apply(status, this.actor.getStatusEffects(key))
         ability = key
       }
     }
 
-    return new AbilityRoll(this.actor, "Skill", item.name, ability, { "skill": rollData.value }, status).render(true)
+    return new AbilityRoll(this.actor, "Skill", item.name, ability,  [{ "value": rollData.value, "type": "skill", "label": item.name }]).render(true)
   }
 }

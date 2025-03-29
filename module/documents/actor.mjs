@@ -160,7 +160,6 @@ export class CamahavActor extends Actor {
 
   roll(ability) {
     const data = this.getRollData()
-    const status = this.getStatusEffects(ability)
-    return new AbilityRoll(this, "Ability", game.i18n.localize(CONFIG.CAMAHAV.abilities[ability]), ability, { "ability": data.abilities[ability].value }, status).render(true)
+    return new AbilityRoll(this, "Ability", game.i18n.localize(CONFIG.CAMAHAV.abilities[ability]), ability, [{ "value": data.abilities[ability].value, "type": "ability", "label": game.i18n.localize(CONFIG.CAMAHAV.abilities[ability]) }]).render(true)
   }
 }

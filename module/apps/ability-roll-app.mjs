@@ -4,15 +4,16 @@
 class AbilityRoll extends FormApplication {
     /**
      * 
-     * @param {*} actor 
-     * @param {*} type 
-     * @param {*} label
-     * @param {*} ability 
-     * @param {*} rolls 
-     * @param {*} roll_penalties 
-     * @param {*} free_successes 
+     * @param {Actor} actor 
+     * @param {String} type can be ability, skill, item or binary
+     * @param {String} label to show on the message
+     * @param {String} ability represents the 3-letter ability used to set Status Effects
+     * @param {Array} rolls objects containing type, value and label for each roll
+     * @param {Number} free_successes given free successes for the roll
+     * @param {Number} target_num target number for each roll
+     * @param {Number} difficulty successes needed to be a success, defaults to 0 if there is no difficulty set
      */
-    constructor(actor, type = "", label = "", ability = "", rolls = {}, free_successes = 0, difficulty = 0, target_num = 4) {
+    constructor(actor, type = "", label = "", ability = "", rolls = [], free_successes = 0, target_num = 4, difficulty = 0) {
         super();
         this.actor = actor;
         this.type = type;
@@ -30,7 +31,6 @@ class AbilityRoll extends FormApplication {
             classes: ['form'],
             popOut: true,
             width: 400,
-            height: 200,
             template: `systems/camahav/templates/applications/ability-roll.hbs`,
             id: 'ability_roll',
             title: game.i18n.localize('CAMAHAV.AbilityRoll')
@@ -44,7 +44,8 @@ class AbilityRoll extends FormApplication {
             label: this.label,
             penalties: this.roll_penalties,
             rolls: this.rolls,
-            ability: this.ability
+            ability: this.ability,
+            free_successes: this.free_successes
         };
     }
 
@@ -53,21 +54,31 @@ class AbilityRoll extends FormApplication {
     }
 
     async pRoll(event, formData) {
+        console.log(formData)
+
         var results = []
         var formula = ""
 
         // Build the complete formula for the roll
-        for (const key in this.rolls) {
+        for (let i = 0; i < this.rolls.length; i++) {
+            // Equal the value of the roll to the one received from the form
+            this.rolls[i].value = formData[this.rolls[i].type]
+            // Check for penalties on the roll
             for (const penalty in this.roll_penalties) {
                 // if the penalty is to the same roll, apply it
-                if(key == "ability" || key == "skill") this.rolls[key] -= 1;
+                if (this.rolls[i].type == "ability" || this.rolls[i].type == "skill") this.rolls[i].value -= 1;
             }
-            if (this.rolls[key] > 0) formula += `+${this.rolls[key]}d8[${key}]`
-            if (this.rolls[key] == 0) formula += `+1d8[${key}]`
-            if (this.rolls[key] < 0) formula += `+1d8[${key}]`
-            if (this.rolls[key] < -1) formula += `+1d0[${key}]`
+            if (this.rolls[i].value > 0) formula += `+${this.rolls[i].value}d8[${this.rolls[i].type}]`
+            if (this.rolls[i].value == 0) formula += `+1d8[${this.rolls[i].type}]`
+            if (this.rolls[i].value < 0) formula += `+1d8[${this.rolls[i].type}]`
+            if (this.rolls[i].value < -1) formula += `+1d0[${this.rolls[i].type}]`
         }
 
+        // Add free successes
+        formula += "+" + formData.free_successes;
+
+        console.log(formula)
+        // Create the roll with the formula
         var r = new Roll(formula);
 
         await r.evaluate();
@@ -76,10 +87,23 @@ class AbilityRoll extends FormApplication {
 
         for (const term of r.terms) {
 
-            var dice = this.rolls[term.options.flavor];
+            // If there are no results, omit the term
+            if (!term.results) {
+                if (term.number) {
+                    var free_rolls = []
+                    for (let i = 0; i < term.number; i++) {
+                        free_rolls.push({ result: 6, success: 1, free: true })
+                    }
+                    results.push(free_rolls)
+                    r._total += term.number;
+                }
+                continue;
+            }
+
+            var dice = this.rolls.filter((el) => el.type == term.options.flavor)[0].value;
 
             if (dice < -1) {
-                results.push({result: 0, not: 1})
+                results.push({ result: 0, not: 1 })
             }
 
             if (dice == -1) {
@@ -121,6 +145,7 @@ class AbilityRoll extends FormApplication {
             }
         } // for
 
+        console.log(results)
         const content = await renderTemplate('systems/camahav/templates/message/roll.hbs', {
             total: CONFIG.CAMAHAV.Roman[r._total],
             status: this.actor.getStatusEffects(this.ability),
