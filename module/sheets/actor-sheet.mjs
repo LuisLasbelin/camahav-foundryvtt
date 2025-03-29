@@ -32,7 +32,7 @@ export class CamahavActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
+  async getData() {
     // Retrieve the data structure from the base sheet. You can inspect or log
     // the context variable to see the structure, but some key properties for
     // sheets are the actor object, the data object, whether or not it's
@@ -66,6 +66,11 @@ export class CamahavActorSheet extends ActorSheet {
       // as well as any items
       this.actor.allApplicableEffects()
     );
+
+    // Enrich thee text for the biography
+    context.enrichedHtml = {
+      biography: await TextEditor.enrichHTML(context.system.biography ?? ''),
+    };
 
     return context;
   }

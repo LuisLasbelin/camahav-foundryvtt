@@ -38,7 +38,7 @@ export class CamahavItemSheet extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
+  async getData() {
     // Retrieve base data structure.
     const context = super.getData();
 
@@ -61,6 +61,11 @@ export class CamahavItemSheet extends ItemSheet {
 
     // Prepare active effects for easier access
     context.effects = prepareActiveEffectCategories(this.item.effects);
+
+    // Enrich thee text for the description
+    context.enrichedHtml = {
+			description: await TextEditor.enrichHTML(context.system.description ?? ''),
+		};
 
     console.log(context)
     return context;
