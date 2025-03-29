@@ -80,6 +80,6 @@ export class CamahavItem extends Item {
       }
     }
 
-    return new AbilityRoll(this.actor, "Skill", item.name, ability, { "ability": this.actor.system.abilities[ability].value, "skill": rollData.value }, status).render(true)
+    return new AbilityRoll(this.actor, "Skill", item.name, ability, { "skill": rollData.value }, status).render(true)
   }
 }

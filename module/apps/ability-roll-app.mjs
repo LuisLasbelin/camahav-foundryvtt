@@ -60,7 +60,7 @@ class AbilityRoll extends FormApplication {
         for (const key in this.rolls) {
             for (const penalty in this.roll_penalties) {
                 // if the penalty is to the same roll, apply it
-                if(key == "ability") this.rolls[key] -= 1;
+                if(key == "ability" || key == "skill") this.rolls[key] -= 1;
             }
             if (this.rolls[key] > 0) formula += `+${this.rolls[key]}d8[${key}]`
             if (this.rolls[key] == 0) formula += `+1d8[${key}]`
