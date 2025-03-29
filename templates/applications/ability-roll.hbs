@@ -1,6 +1,5 @@
 <form id="roll-form" class="message flexcol">
     <h2 style="display: none;" id="label">{{label}}</h2>
-    <input id="ability" name="ability" type="text" value="{{activeAbility}}" />
     <ol id="status" class="dice-rolls">
         {{#each status}}
         <li class="status-label">
@@ -12,7 +11,7 @@
     <div class="grid grid-2col">
         <div class="ability flexrow flex-group-center">
             {{#each rolls}}
-            <label for="roll" class="resource-label flexlarge align-left">{{../ability}}</label>
+            <label for="roll" class="resource-label flexlarge align-left">{{@key}}</label>
             <input id="dice" type="text" name="rolls.{{@key}}" value="{{this}}" data-dtype="Number" />
             {{/each}}
         </div>
