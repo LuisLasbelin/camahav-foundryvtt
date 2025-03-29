@@ -53,11 +53,17 @@ class AbilityRoll extends FormApplication {
         super.activateListeners(html);
     }
 
+    /**
+     * Make a Poisson Roll with the form data
+     * @param {*} event 
+     * @param {*} formData 
+     */
     async pRoll(event, formData) {
         console.log(formData)
 
         var results = []
         var formula = ""
+        var free_successes = formData.free_successes
 
         // Build the complete formula for the roll
         for (let i = 0; i < this.rolls.length; i++) {
@@ -68,6 +74,14 @@ class AbilityRoll extends FormApplication {
                 // if the penalty is to the same roll, apply it
                 if (this.rolls[i].type == "ability" || this.rolls[i].type == "skill") this.rolls[i].value -= 1;
             }
+
+            // If the roll is safe convert half of the dice to automatic success, apllied after the status effects
+            if (formData.safe && this.rolls[i].value >= 2) {
+                var reduction = Math.floor(this.rolls[i].value / 2);
+                free_successes += reduction;
+                this.rolls[i].value -= reduction;
+            }
+
             if (this.rolls[i].value > 0) formula += `+${this.rolls[i].value}d8[${this.rolls[i].type}]`
             if (this.rolls[i].value == 0) formula += `+1d8[${this.rolls[i].type}]`
             if (this.rolls[i].value < 0) formula += `+1d8[${this.rolls[i].type}]`
@@ -75,7 +89,7 @@ class AbilityRoll extends FormApplication {
         }
 
         // Add free successes
-        formula += "+" + formData.free_successes;
+        formula += "+" + free_successes;
 
         console.log(formula)
         // Create the roll with the formula
