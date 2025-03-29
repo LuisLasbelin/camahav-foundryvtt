@@ -119,7 +119,32 @@
         "base"
       ],
       "value": 0,
-      "abilities": []
+      "abilities": {
+        "str": {
+          "value": 0
+        },
+        "pre": {
+          "value": 0
+        },
+        "mov": {
+          "value": 0
+        },
+        "con": {
+          "value": 0
+        },
+        "wil": {
+          "value": 0
+        },
+        "per": {
+          "value": 0
+        },
+        "emp": {
+          "value": 0
+        },
+        "int": {
+          "value": 0
+        }
+      }
     },
     "item": {
       "templates": [

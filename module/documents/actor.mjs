@@ -2,6 +2,10 @@ import {
   rollFromHtml
 } from '../helpers/roll.mjs'
 
+import {
+  AbilityRoll
+} from '../apps/ability-roll-app.mjs'
+
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -139,9 +143,14 @@ export class CamahavActor extends Actor {
     // Process additional NPC data here.
   }
 
-  roll(ability) {
-    const data = this.getRollData()
+  /**
+   * Checks all status effects that apply to the given ability from the actor
+   * @param {String} ability to which apply status effects
+   * @returns array with the strings of the status effects applied
+   */
+  getStatusEffects(ability) {
     var status = []
+    var data = this.getRollData()
     // Check status effects
     if (["str", "con"].includes(ability) && data.status.poison.value > data.vigor.value) status.push(CONFIG.CAMAHAV.Status.poison)
     if (["mov", "pre"].includes(ability) && data.status.fatigue.value > data.vigor.value) status.push(CONFIG.CAMAHAV.Status.fatigue)
@@ -150,24 +159,12 @@ export class CamahavActor extends Actor {
     if (["wil", "emp"].includes(ability) && data.status.agitated.value > data.resolve.value) status.push(CONFIG.CAMAHAV.Status.agitated)
     if (["per", "int", "wil", "emp"].includes(ability) && data.status.cursed.value > data.resolve.value) status.push(CONFIG.CAMAHAV.Status.cursed)
 
-    renderTemplate('systems/camahav/templates/message/dialogRoll.hbs', {
-      actor: this,
-      label: game.i18n.localize(CONFIG.CAMAHAV.abilities[ability]),
-      roll: data.abilities[ability].value,
-      status: status
-    }).then((res) => {
-      new Dialog({
-        title: game.i18n.localize(CONFIG.CAMAHAV.abilities[ability]),
-        content: res,
-        buttons: {
-          button1: {
-            label: "Roll",
-            callback: (html) => rollFromHtml(html),
-            icon: `<i class="fas fa-check"></i>`
-          }
-        }
-      }).render(true);
-    });
-    return
+    return status;
+  }
+
+  roll(ability) {
+    const data = this.getRollData()
+    const status = this.getStatusEffects(ability)
+    return new AbilityRoll(this, "Ability", game.i18n.localize(CONFIG.CAMAHAV.abilities[ability]), ability, { "ability": data.abilities[ability].value }, status).render(true)
   }
 }

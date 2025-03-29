@@ -1,5 +1,6 @@
 <form id="roll-form" class="message flexcol">
     <h2 style="display: none;" id="label">{{label}}</h2>
+    <input id="ability" name="ability" type="text" value="{{activeAbility}}" />
     <ol id="status" class="dice-rolls">
         {{#each status}}
         <li class="status-label">
@@ -10,9 +11,11 @@
     </ol>
     <div class="grid grid-2col">
         <div class="ability flexrow flex-group-center">
-            <label for="roll" class="resource-label rollable flexlarge align-left">{{localize
-                'CAMAHAV.RollValue'}}</label>
-            <input id="dice" type="text" name="roll" value="{{roll}}" data-dtype="Number" />
+            {{#each rolls}}
+            <label for="roll" class="resource-label flexlarge align-left">{{../ability}}</label>
+            <input id="dice" type="text" name="rolls.{{@key}}" value="{{this}}" data-dtype="Number" />
+            {{/each}}
         </div>
     </div>
+    <button type="submit">{{localize "CAMAHAV.Roll"}}</button>
 </form>

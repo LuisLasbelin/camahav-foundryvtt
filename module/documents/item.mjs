@@ -1,3 +1,7 @@
+import {
+  AbilityRoll
+} from '../apps/ability-roll-app.mjs'
+
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -57,15 +61,25 @@ export class CamahavItem extends Item {
       const rollData = this.getRollData();
 
       // Invoke the roll and submit it to chat.
-      const roll = new pRoll(rollData.formula, rollData);
-      // If you need to store the value first, uncomment the next line.
-      // const result = await roll.evaluate();
-      roll.toMessage({
-        speaker: speaker,
-        rollMode: rollMode,
-        flavor: label,
-      });
-      return roll;
+      pRoll(this.actor, label, [rollData.formula]);
+      return;
     }
+  }
+
+  async rollSkill() {
+    const item = this;
+    var status = []
+    var ability = "str"
+
+    const rollData = this.getRollData();
+    for (const key in rollData.abilities) {
+      if (rollData.abilities[key].value > 0) {
+        // Join the two arrays to get only one
+        status.push.apply(status, this.actor.getStatusEffects(key))
+        ability = key
+      }
+    }
+
+    return new AbilityRoll(this.actor, "Skill", item.name, ability, { "ability": this.actor.system.abilities[ability].value, "skill": rollData.value }, status).render(true)
   }
 }

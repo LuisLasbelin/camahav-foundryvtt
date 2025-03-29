@@ -256,17 +256,18 @@ export class CamahavActorSheet extends ActorSheet {
         if (item) return item.roll();
       }
       if (dataset.rollType == 'skill') {
-        const itemId = element.closest('.skill').dataset.itemId;
-        const item = this.actor.skills.get(itemId);
-        if (item) return item.roll();
+        const itemId = element.closest('.item').dataset.itemId;
+        const item = this.actor.items.get(itemId);
+        if (item) return item.rollSkill();
       }
     }
 
-    // Handle rolls that supply the formula directly.
+    // Ability rolls
     if (dataset.roll) {
       if (dataset.rollType == 'ability') {
         return this.actor.roll(dataset.ability)
       }
+      // Direct formula
       let label = dataset.label ? `[ability] ${dataset.label}` : '';
       let roll = new Roll(dataset.roll, this.actor.getRollData());
       roll.toMessage({

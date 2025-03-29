@@ -6,10 +6,12 @@
     </ol>
     <ol class="dice-rolls">
         {{#each results}}
+        {{#each this}}
         {{#if this.not}} <li class="d8-result">{{this.result}}</li>{{/if}}
         {{#if this.success}}<li class="d8-result success">{{this.result}}</li>{{/if}}
         {{#if this.double}} <li class="d8-result double">{{this.result}}</li>{{/if}}
         {{#if this.triple}} <li class="d8-result triple">{{this.result}}</li>{{/if}}
+        {{/each}}
         {{/each}}
     </ol>
     <div class="flexcol flex-center roll-result">
