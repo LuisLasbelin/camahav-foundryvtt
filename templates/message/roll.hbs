@@ -1,9 +1,12 @@
 <div class="message flexcol">
+    <h3 class="label">{{label}}</h3>
+    {{#if status}}
     <ol class="dice-rolls">
         {{#each status}}
         <li class="status-label"><img width="32px" src="{{this.icon}}" />{{localize this.label}}</li>
         {{/each}}
     </ol>
+    {{/if}}
     <ol class="dice-rolls">
         {{#each results}}
         {{#each this}}

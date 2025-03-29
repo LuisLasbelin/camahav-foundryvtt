@@ -165,7 +165,8 @@ class AbilityRoll extends FormApplication {
             status: this.actor.getStatusEffects(this.ability),
             results: results,
             performance: game.i18n.localize(CONFIG.CAMAHAV.actionResult[r._total]),
-            actor: this.actor
+            actor: this.actor,
+            label: this.label
         })
 
         r.toMessage({
