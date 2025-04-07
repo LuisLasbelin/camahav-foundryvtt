@@ -158,9 +158,9 @@ export class CamahavActor extends Actor {
     return status;
   }
 
-  roll(ability, type = "ability") {
+  roll(ability, value = 0, type = "ability") {
     const data = this.getRollData()
-    if (type == ability) {
+    if (type == "ability") {
       return new AbilityRoll(
         this,
         "Ability",
@@ -168,23 +168,24 @@ export class CamahavActor extends Actor {
         ability,
         [
           {
-            "value": data.abilities[ability].value,
+            "value": value,
             "type": "ability",
             "label": game.i18n.localize(CONFIG.CAMAHAV.abilities[ability])
           }
         ]).render(true)
     }
     if (type == "status") {
+      console.log(ability)
       return new AbilityRoll(
         this,
         "Status",
-        game.i18n.localize(CONFIG.CAMAHAV.status[ability]),
+        game.i18n.localize(CONFIG.CAMAHAV.Status[ability].label),
         ability,
         [
           {
-            "value": data.status[ability].value,
+            "value": value,
             "type": "status",
-            "label": game.i18n.localize(CONFIG.CAMAHAV.status[ability].label)
+            "label": game.i18n.localize(CONFIG.CAMAHAV.Status[ability].label)
           }
         ]).render(true)
     }

@@ -47,7 +47,7 @@ class AbilityRoll extends FormApplication {
             label: this.label,
             penalties: this.roll_penalties,
             rolls: this.rolls,
-            used_ability: this.ability,
+            used_ability: this.used_ability,
             free_successes: this.free_successes,
             abilities: CONFIG.CAMAHAV.abilities
         };
@@ -76,7 +76,7 @@ class AbilityRoll extends FormApplication {
         var results = []
         var formula = ""
         var free_successes = formData.free_successes
-        
+
         // Build the complete formula for the roll
         for (let i = 0; i < this.rolls.length; i++) {
             // Equal the value of the roll to the one received from the form
@@ -186,8 +186,58 @@ class AbilityRoll extends FormApplication {
         });
     }
 
+    /**
+     * Makes a roll to reduce status effect
+     * @param {*} event 
+     * @param {*} formData 
+     */
+    async statusRoll(event, formData) {
+
+        console.log(formData)
+
+        var results = []
+        var formula = formData.status + "d8[status]"
+
+        // Create the roll with the formula
+        var r = new Roll(formula);
+
+        await r.evaluate();
+
+        r._total = 0
+
+        for (const term of r.terms) {
+
+            r._total += term.results.filter((el) => el.result == 8).length
+
+            var temp_r = term.results;
+            for (let i = 0; i < temp_r.length; i++) {
+                if (temp_r[i].result == 8) temp_r[i].success = 1
+                else if (temp_r[i].result < 8) temp_r[i].not = 1
+            }
+            results.push(temp_r);
+        }
+
+        const content = await renderTemplate('systems/camahav/templates/message/roll.hbs', {
+            total: r._total,
+            results: results,
+            performance: game.i18n.localize(CONFIG.CAMAHAV.actionResult[r._total]),
+            actor: this.actor,
+            label: this.label
+        })
+
+        r.toMessage({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: content,
+            rollMode: game.settings.get('core', 'rollMode'),
+        });
+    }
+
     async _updateObject(event, formData) {
-        this.pRoll(event, formData)
+        if (formData.status) {
+            this.statusRoll(event, formData);
+            return;
+        }
+        this.pRoll(event, formData);
         return;
     }
 }
