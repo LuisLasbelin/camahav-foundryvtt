@@ -1,11 +1,19 @@
 <form id="roll-form" class="flexcol">
     <h2>{{label}}</h2>
+    <select class="ability-select" name="used_ability">
+        {{selectOptions abilities selected=ability localize=true}}
+    </select>
     <ol class="dice-rolls">
         {{#each status}}
-        <li class="status-label">
-            <img width="32px" src="{{this.icon}}" />{{localize this.label}}
-            <input class="status" type="hidden" value="{{this.id}}" name="{{this.id}}" />
-        </li>
+        {{!--only show the status effects that correspond to the chosen ability--}}
+        {{#ifEquals this.ability ../used_ability}}
+            {{#each this.effects}}
+            <li class="status-label">
+                <img width="32px" src="{{this.icon}}" />{{localize this.label}}
+                <input class="status" type="hidden" value="{{this.id}}" name="status" />
+            </li>
+            {{/each}}
+        {{/ifEquals}}
         {{/each}}
     </ol>
     <div class="grid grid-2col">

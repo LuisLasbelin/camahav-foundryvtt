@@ -67,8 +67,10 @@
   color: #51520b;
   filter: sepia(0.5) hue-rotate(360deg);
 }
-.message .status-label {
+
+.status-label {
   border-radius: 15px;
+  max-width: 150px;
   border: 2px solid #443627;
   box-shadow: inset 0px 2px 5px #443627;
   background-color: #F2F6D0;
@@ -77,7 +79,7 @@
   align-items: center;
   font-weight: bold;
 }
-.message .status-label img {
+.status-label img {
   border-radius: 15px;
   margin-right: 5px;
 }

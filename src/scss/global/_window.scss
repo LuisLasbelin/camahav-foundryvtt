@@ -3,6 +3,7 @@
 }
 
 .rollable {
+
   &:hover,
   &:focus {
     color: #000;
@@ -15,13 +16,16 @@
   background-color: $c-m-white;
   border: 5px solid $c-m-dark;
   box-shadow: 0px 2px 5px $c-m-dark;
+
   p {
     margin: 5px;
   }
+
   .label {
     border-bottom: 5px solid $c-m-dark;
     box-shadow: 0px 2px 5px $c-m-dark;
   }
+
   .roll-result {
     align-self: center;
     width: 25%;
@@ -30,16 +34,19 @@
     box-shadow: inset 0px 2px 5px $c-m-dark;
     background-color: $c-m-white;
     text-align: center;
+
     h4 {
       margin: 0;
       font-size: var(--font-size-20);
       font-weight: bold;
     }
   }
+
   .dice-rolls {
     list-style: none;
     display: flex;
     flex-direction: row;
+
     .d8-result {
       position: relative;
       min-width: 24px;
@@ -54,32 +61,37 @@
       color: #000;
       font-weight: bold;
     }
+
     .success {
       color: #18520b;
       filter: sepia(0.5) hue-rotate(60deg);
     }
+
     .double {
       color: #100b52;
       filter: sepia(0.5) hue-rotate(138deg);
     }
+
     .triple {
       color: #51520b;
       filter: sepia(0.5) hue-rotate(360deg);
     }
   }
+}
 
-  .status-label {
+.status-label {
+  border-radius: 15px;
+  max-width: 150px;
+  border: 2px solid $c-m-dark;
+  box-shadow: inset 0px 2px 5px $c-m-dark;
+  background-color: $c-m-white;
+  padding: 0 10px 0 0;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+
+  img {
     border-radius: 15px;
-    border: 2px solid $c-m-dark;
-    box-shadow: inset 0px 2px 5px $c-m-dark;
-    background-color: $c-m-white;
-    padding: 0 10px 0 0;
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    img {
-      border-radius: 15px;
-      margin-right: 5px
-    }
+    margin-right: 5px
   }
 }

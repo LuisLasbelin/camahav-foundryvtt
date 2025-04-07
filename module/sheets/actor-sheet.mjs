@@ -270,7 +270,10 @@ export class CamahavActorSheet extends ActorSheet {
     // Ability rolls
     if (dataset.roll) {
       if (dataset.rollType == 'ability') {
-        return this.actor.roll(dataset.ability)
+        return this.actor.roll(dataset.ability, "ability")
+      }
+      if (dataset.rollType == 'status') {
+        return this.actor.roll(dataset.status, "status")
       }
       // Direct formula
       let label = dataset.label ? `[ability] ${dataset.label}` : '';

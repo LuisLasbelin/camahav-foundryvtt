@@ -22,7 +22,6 @@ class AbilityRoll extends FormApplication {
         this.rolls = rolls;
         this.difficulty = difficulty;
         this.target_num = target_num;
-        this.roll_penalties = this.actor.getStatusEffects(this.ability)
         this.free_successes = free_successes;
     }
 
@@ -38,19 +37,32 @@ class AbilityRoll extends FormApplication {
     }
 
     getData() {
+        var status = []
+        for (const key in CONFIG.CAMAHAV.abilities) {
+            status.push({ ability: key, effects: this.actor.getStatusEffects(key) })
+        }
         // Send data to the template
         return {
-            status: this.actor.getStatusEffects(this.ability),
+            status: status,
             label: this.label,
             penalties: this.roll_penalties,
             rolls: this.rolls,
-            ability: this.ability,
-            free_successes: this.free_successes
+            used_ability: this.ability,
+            free_successes: this.free_successes,
+            abilities: CONFIG.CAMAHAV.abilities
         };
     }
 
     activateListeners(html) {
         super.activateListeners(html);
+
+        // Update status effects when choosing an ability
+        html.on('change', '.ability-select', (ev) => {
+            const select = ev.currentTarget;
+            console.log(select)
+            this.ability = select.value;
+            this.render(true)
+        });
     }
 
     /**
@@ -64,15 +76,15 @@ class AbilityRoll extends FormApplication {
         var results = []
         var formula = ""
         var free_successes = formData.free_successes
-
+        
         // Build the complete formula for the roll
         for (let i = 0; i < this.rolls.length; i++) {
             // Equal the value of the roll to the one received from the form
             this.rolls[i].value = formData[this.rolls[i].type]
             // Check for penalties on the roll
-            for (const penalty in this.roll_penalties) {
-                // if the penalty is to the same roll, apply it
-                if (this.rolls[i].type == "ability" || this.rolls[i].type == "skill") this.rolls[i].value -= 1;
+            for (const status in formData.status) {
+                // if the penalty is to the ability, do not roll it
+                if (this.rolls[i].type == "ability") this.rolls[i].value = 0;
             }
 
             // If the roll is safe convert half of the dice to automatic success, apllied after the status effects
@@ -86,12 +98,11 @@ class AbilityRoll extends FormApplication {
             if (this.rolls[i].value == 0) formula += `+1d8[${this.rolls[i].type}]`
             if (this.rolls[i].value < 0) formula += `+1d8[${this.rolls[i].type}]`
             if (this.rolls[i].value < -1) formula += `+1d0[${this.rolls[i].type}]`
-        }
+        } // for each roll
 
         // Add free successes
         formula += "+" + free_successes;
 
-        console.log(formula)
         // Create the roll with the formula
         var r = new Roll(formula);
 
@@ -157,9 +168,8 @@ class AbilityRoll extends FormApplication {
                 }
                 results.push(temp_r)
             }
-        } // for
+        } // for each term
 
-        console.log(results)
         const content = await renderTemplate('systems/camahav/templates/message/roll.hbs', {
             total: CONFIG.CAMAHAV.Roman[r._total],
             status: this.actor.getStatusEffects(this.ability),

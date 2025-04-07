@@ -77,6 +77,22 @@ export class CamahavItem extends Item {
       }
     }
 
-    return new AbilityRoll(this.actor, "Skill", item.name, ability,  [{ "value": rollData.value, "type": "skill", "label": item.name }]).render(true)
+    return new AbilityRoll(
+      this.actor,
+      "Skill",
+      item.name,
+      ability,
+      [
+        {
+          "value": rollData.value,
+          "type": "skill",
+          "label": item.name
+        },
+        {
+          "value": this.actor.getRollData().abilities[ability].value,
+          "type": "ability",
+          "label": game.i18n.localize(CONFIG.CAMAHAV.abilities[ability])
+        }
+      ]).render(true)
   }
 }

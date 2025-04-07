@@ -158,8 +158,35 @@ export class CamahavActor extends Actor {
     return status;
   }
 
-  roll(ability) {
+  roll(ability, type = "ability") {
     const data = this.getRollData()
-    return new AbilityRoll(this, "Ability", game.i18n.localize(CONFIG.CAMAHAV.abilities[ability]), ability, [{ "value": data.abilities[ability].value, "type": "ability", "label": game.i18n.localize(CONFIG.CAMAHAV.abilities[ability]) }]).render(true)
+    if (type == ability) {
+      return new AbilityRoll(
+        this,
+        "Ability",
+        game.i18n.localize(CONFIG.CAMAHAV.abilities[ability]),
+        ability,
+        [
+          {
+            "value": data.abilities[ability].value,
+            "type": "ability",
+            "label": game.i18n.localize(CONFIG.CAMAHAV.abilities[ability])
+          }
+        ]).render(true)
+    }
+    if (type == "status") {
+      return new AbilityRoll(
+        this,
+        "Status",
+        game.i18n.localize(CONFIG.CAMAHAV.status[ability]),
+        ability,
+        [
+          {
+            "value": data.status[ability].value,
+            "type": "status",
+            "label": game.i18n.localize(CONFIG.CAMAHAV.status[ability].label)
+          }
+        ]).render(true)
+    }
   }
 }
