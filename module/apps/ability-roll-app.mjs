@@ -13,12 +13,12 @@ class AbilityRoll extends FormApplication {
      * @param {Number} target_num target number for each roll
      * @param {Number} difficulty successes needed to be a success, defaults to 0 if there is no difficulty set
      */
-    constructor(actor, type = "", label = "", ability = "", rolls = [], free_successes = 0, target_num = 4, difficulty = 0) {
+    constructor(actor, type = "", label = "", used_ability = "", rolls = [], free_successes = 0, target_num = 4, difficulty = 0) {
         super();
         this.actor = actor;
         this.type = type;
         this.label = label;
-        this.ability = ability;
+        this.used_ability = used_ability;
         this.rolls = rolls;
         this.difficulty = difficulty;
         this.target_num = target_num;
@@ -60,7 +60,7 @@ class AbilityRoll extends FormApplication {
         html.on('change', '.ability-select', (ev) => {
             const select = ev.currentTarget;
             console.log(select)
-            this.ability = select.value;
+            this.used_ability = select.value;
             this.render(true)
         });
     }
@@ -171,7 +171,7 @@ class AbilityRoll extends FormApplication {
         } // for each term
 
         const content = await renderTemplate('systems/camahav/templates/message/roll.hbs', {
-            total: CONFIG.CAMAHAV.Roman[r._total],
+            total: r._total,
             status: this.actor.getStatusEffects(this.ability),
             results: results,
             performance: game.i18n.localize(CONFIG.CAMAHAV.actionResult[r._total]),

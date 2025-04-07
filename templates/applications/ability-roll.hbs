@@ -1,7 +1,7 @@
 <form id="roll-form" class="flexcol">
     <h2>{{label}}</h2>
     <select class="ability-select" name="used_ability">
-        {{selectOptions abilities selected=ability localize=true}}
+        {{selectOptions abilities selected=used_ability localize=true}}
     </select>
     <ol class="dice-rolls">
         {{#each status}}
