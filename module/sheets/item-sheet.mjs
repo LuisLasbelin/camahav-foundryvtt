@@ -69,6 +69,7 @@ export class CamahavItemSheet extends ItemSheet {
 
     context.abilities = CONFIG.CAMAHAV.abilities
     context.weaponTypes = CONFIG.CAMAHAV.weaponTypes
+    context.damageDegree = CONFIG.CAMAHAV.damageDegree
 
     console.log(context)
     return context;

@@ -100,7 +100,10 @@
     "Hands": "Hands",
     "CriticalAvoid": "Avoid crits",
     "Items": "Items",
-    "Equipment": "Equipment"
+    "Equipment": "Equipment",
+    "Defense": "Defense",
+    "RequiredHands": "Required hands",
+    "WeaponType": "Weapon type"
   },
   "TYPES": {
     "Actor": {

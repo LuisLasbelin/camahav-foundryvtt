@@ -117,7 +117,7 @@ export class CamahavActorSheet extends ActorSheet {
     const gear_types = ["item", "armor", "weapon", "shield"]
     const gear = [];
     const armor = [];
-    const weapon = [];
+    const weapons = [];
     const features = [];
     const classes = [];
     const skills = [];
@@ -142,7 +142,7 @@ export class CamahavActorSheet extends ActorSheet {
       // Append if it is equipped on the character
       else if (i.system.equipped > 0) {
         if (i.type === "armor") armor.push(i);
-        if (i.type === "weapon" || i.type === "shield") weapon.push(i);
+        if (i.type === "weapon" || i.type === "shield") weapons.push(i);
       }
       // Append to features.
       else if (i.type === 'feature') {
@@ -171,7 +171,7 @@ export class CamahavActorSheet extends ActorSheet {
     context.skills = skills;
     context.spells = spells;
     context.armor = armor;
-    context.weapon = weapon;
+    context.weapons = weapons;
   }
 
   /* -------------------------------------------- */

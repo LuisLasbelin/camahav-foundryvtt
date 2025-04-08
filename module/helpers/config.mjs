@@ -64,3 +64,9 @@ CAMAHAV.weaponTypes = {
   "thrown": "CAMAHAV.WeaponTypes.Thrown",
   "fight": "CAMAHAV.WeaponTypes.Fight"
 }
+
+CAMAHAV.damageDegree = {
+  "weak": "Weak",
+  "medium": "Medium",
+  "strong": "Strong",
+}

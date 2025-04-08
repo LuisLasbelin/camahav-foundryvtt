@@ -5,10 +5,6 @@
       <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
       <div class="grid grid-2col">
         <div class="resource">
-          <label class="resource-label">{{localize "CAMAHAV.Quantity"}}</label>
-          <input type="text" name="system.quantity" value="{{system.quantity}}" data-dtype="Number" />
-        </div>
-        <div class="resource">
           <label class="resource-label">{{localize "CAMAHAV.Weight"}}</label>
           <input type="text" name="system.weight" value="{{system.weight}}" data-dtype="Number" />
         </div>
@@ -49,13 +45,19 @@
             </div>
           </div>
           <div>
+            <label class="resource-label">{{localize "CAMAHAV.Damage"}}</label>
             <select class="ability-select" name="damage">
-              {{selectOptions abilities selected=damage localize=true}}
+              {{selectOptions damageDegree selected=damage localize=true}}
             </select>
+            <label class="resource-label">{{localize "CAMAHAV.WeaponType"}}</label>
             <select class="ability-select" name="weaponType">
               {{selectOptions weaponTypes selected=weaponType localize=true}}
             </select>
           </div>
+        </div>
+        <div>
+          <label class="resource-label">{{localize "CAMAHAV.RequiredHands"}}</label>
+          <input name="system.requiredHands" type="text" value="{{system.requiredHands}}" data-dtype="Number" />
         </div>
       </div>
     </div>

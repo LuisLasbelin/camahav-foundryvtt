@@ -150,8 +150,8 @@
       "templates": [
         "base"
       ],
-      "weight": 0,
-      "defense": 0,
+      "weight": 1,
+      "defense": 1,
       "traits": [],
       "isAdvanced": 0,
       "criticalAvoid": {
@@ -164,11 +164,12 @@
       "templates": [
         "base"
       ],
-      "weight": 0,
+      "weight": 1,
       "hands": 1,
+      "requiredHands": 2,
       "weaponType": "onehand",
       "traits": [],
-      "damage": "str",
+      "damage": "weak",
       "isAdvanced": 0,
       "equipped": 0
     },
@@ -176,7 +177,7 @@
       "templates": [
         "base"
       ],
-      "weight": 0,
+      "weight": 1,
       "hands": 1,
       "traits": [],
       "criticalAvoid": 1,
