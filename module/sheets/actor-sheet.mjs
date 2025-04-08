@@ -114,7 +114,10 @@ export class CamahavActorSheet extends ActorSheet {
    */
   _prepareItems(context) {
     // Initialize containers.
+    const gear_types = ["item", "armor", "weapon", "shield"]
     const gear = [];
+    const armor = [];
+    const weapon = [];
     const features = [];
     const classes = [];
     const skills = [];
@@ -132,9 +135,14 @@ export class CamahavActorSheet extends ActorSheet {
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || Item.DEFAULT_ICON;
-      // Append to gear.
-      if (i.type === 'item') {
+      // Append to gear if it's not equipped
+      if (gear_types.includes(i.type) && !i.system.equipped) {
         gear.push(i);
+      }
+      // Append if it is equipped on the character
+      else if (i.system.equipped > 0) {
+        if (i.type === "armor") armor.push(i);
+        if (i.type === "weapon" || i.type === "shield") weapon.push(i);
       }
       // Append to features.
       else if (i.type === 'feature') {
@@ -162,6 +170,8 @@ export class CamahavActorSheet extends ActorSheet {
     context.classes = classes;
     context.skills = skills;
     context.spells = spells;
+    context.armor = armor;
+    context.weapon = weapon;
   }
 
   /* -------------------------------------------- */
@@ -180,6 +190,14 @@ export class CamahavActorSheet extends ActorSheet {
     // -------------------------------------------------------------
     // Everything below here is only needed if the sheet is editable
     if (!this.isEditable) return;
+
+    html.on('click', '.item-equip', (ev) => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.items.get(li.data('itemId'));
+      console.log(item)
+      if (item.system.equipped == 1) item.update({system: {equipped: 0}})
+      if (item.system.equipped == 0) item.update({system: {equipped: 1}})
+    });
 
     // Add Inventory Item
     html.on('click', '.item-create', this._onItemCreate.bind(this));

@@ -56,3 +56,11 @@ CAMAHAV.Status = {
   "agitated": { icon: "icons/skills/social/intimidation-impressing.webp", type: "mental", label: "CAMAHAV.Status.Agitated", id: "agitated"},
   "cursed": { icon: "icons/magic/control/fear-fright-monster-grin-purple-blue.webp", type: "mental", label: "CAMAHAV.Status.Cursed", id: "cursed"}
 }
+
+CAMAHAV.weaponTypes = {
+  "onehanded": "CAMAHAV.WeaponTypes.OneHanded",
+  "polearm": "CAMAHAV.WeaponTypes.Polearm",
+  "heavy": "CAMAHAV.WeaponTypes.Heavy",
+  "thrown": "CAMAHAV.WeaponTypes.Thrown",
+  "fight": "CAMAHAV.WeaponTypes.Fight"
+}

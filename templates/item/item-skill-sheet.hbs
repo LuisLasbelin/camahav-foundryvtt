@@ -27,12 +27,9 @@
     </div>
     {{!-- Configuration Tab --}}
     <div class="tab configuration" data-group="primary" data-tab="configuration">
-      {{#each system.abilities as |ability key|}}
-      <div>
-        <label class="resource-label">{{ability.label}}</label>
-        <input name="system.abilities.{{@key}}.value" type="checkbox" {{checked ability.value}} data-dtype="Number"/>
-      </div>
-      {{/each}}
+      <select class="ability-select" name="ability">
+        {{selectOptions abilities selected=ability localize=true}}
+      </select>
     </div>
   </section>
 </form>

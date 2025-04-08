@@ -68,20 +68,13 @@ export class CamahavItem extends Item {
 
   async rollSkill() {
     const item = this;
-    var ability = "str"
     const rollData = this.getRollData();
-
-    for (const key in rollData.abilities) {
-      if (rollData.abilities[key].value > 0) {
-        ability = key
-      }
-    }
 
     return new AbilityRoll(
       this.actor,
       "Skill",
       item.name,
-      ability,
+      item.ability,
       [
         {
           "value": rollData.value,
@@ -89,9 +82,9 @@ export class CamahavItem extends Item {
           "label": item.name
         },
         {
-          "value": this.actor.getRollData().abilities[ability].value,
+          "value": this.actor.getRollData().abilities[item.ability].value,
           "type": "ability",
-          "label": game.i18n.localize(CONFIG.CAMAHAV.abilities[ability])
+          "label": game.i18n.localize(CONFIG.CAMAHAV.abilities[item.ability])
         }
       ]).render(true)
   }

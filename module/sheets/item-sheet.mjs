@@ -67,6 +67,9 @@ export class CamahavItemSheet extends ItemSheet {
 			description: await TextEditor.enrichHTML(context.system.description ?? ''),
 		};
 
+    context.abilities = CONFIG.CAMAHAV.abilities
+    context.weaponTypes = CONFIG.CAMAHAV.weaponTypes
+
     console.log(context)
     return context;
   }

@@ -58,32 +58,54 @@
         "poison": {
           "value": 0,
           "type": "physical",
-          "affects": ["str", "con"]
+          "affects": [
+            "str",
+            "con"
+          ]
         },
         "fatigue": {
           "value": 0,
           "type": "physical",
-          "affects": ["mov", "pre"]
+          "affects": [
+            "mov",
+            "pre"
+          ]
         },
         "wounded": {
           "value": 0,
           "type": "physical",
-          "affects": ["str", "con", "mov", "pre"]
+          "affects": [
+            "str",
+            "con",
+            "mov",
+            "pre"
+          ]
         },
         "stunned": {
           "value": 0,
           "type": "mental",
-          "affects": ["per", "int"]
+          "affects": [
+            "per",
+            "int"
+          ]
         },
         "agitated": {
           "value": 0,
           "type": "mental",
-          "affects": ["emp", "wil"]
+          "affects": [
+            "emp",
+            "wil"
+          ]
         },
         "cursed": {
           "value": 0,
           "type": "mental",
-          "affects": ["per", "int", "emp", "wil"]
+          "affects": [
+            "per",
+            "int",
+            "emp",
+            "wil"
+          ]
         }
       }
     },
@@ -100,7 +122,10 @@
       "skill",
       "item",
       "feature",
-      "spell"
+      "spell",
+      "weapon",
+      "armor",
+      "shield"
     ],
     "templates": {
       "base": {
@@ -119,32 +144,44 @@
         "base"
       ],
       "value": 0,
-      "abilities": {
-        "str": {
-          "value": 0
-        },
-        "pre": {
-          "value": 0
-        },
-        "mov": {
-          "value": 0
-        },
-        "con": {
-          "value": 0
-        },
-        "wil": {
-          "value": 0
-        },
-        "per": {
-          "value": 0
-        },
-        "emp": {
-          "value": 0
-        },
-        "int": {
-          "value": 0
-        }
-      }
+      "ability": "str"
+    },
+    "armor": {
+      "templates": [
+        "base"
+      ],
+      "weight": 0,
+      "defense": 0,
+      "traits": [],
+      "isAdvanced": 0,
+      "criticalAvoid": {
+        "value": 0,
+        "max": 0
+      },
+      "equipped": 0
+    },
+    "weapon": {
+      "templates": [
+        "base"
+      ],
+      "weight": 0,
+      "hands": 1,
+      "weaponType": "onehand",
+      "traits": [],
+      "damage": "str",
+      "isAdvanced": 0,
+      "equipped": 0
+    },
+    "shield": {
+      "templates": [
+        "base"
+      ],
+      "weight": 0,
+      "hands": 1,
+      "traits": [],
+      "criticalAvoid": 1,
+      "isAdvanced": 0,
+      "equipped": 0
     },
     "item": {
       "templates": [

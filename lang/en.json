@@ -50,6 +50,13 @@
       "Heroic": "Of great renown, heroic, once-in-a-lifetime.",
       "Legendary": "Legendary! Will change the world."
     },
+    "WeaponTypes": {
+      "OneHanded": "One hand",
+      "Polearm": "Polearm",
+      "Heavy": "Heavy weapon",
+      "Thrown": "Thrown weapon",
+      "Fight": "Fighting weapon"
+    },
     "RollValue": "Dice to roll",
     "StatusEffects": "Status effects",
     "Status": {
@@ -87,7 +94,13 @@
     "Skill": "Skill",
     "FreeSuccesses": "Free successes",
     "Roll": "Make roll",
-    "SafeRoll": "Safe roll"
+    "SafeRoll": "Safe roll",
+    "Advanced": "Advanced",
+    "Equipped": "Equipped",
+    "Hands": "Hands",
+    "CriticalAvoid": "Avoid crits",
+    "Items": "Items",
+    "Equipment": "Equipment"
   },
   "TYPES": {
     "Actor": {
@@ -99,7 +112,10 @@
       "skill": "Skill",
       "item": "Item",
       "feature": "Feature",
-      "spell": "Spell"
+      "spell": "Spell",
+      "weapon": "Weapon",
+      "armor": "Armor",
+      "shield": "Shield"
     }
   }
 }
