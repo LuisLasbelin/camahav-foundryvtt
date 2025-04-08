@@ -40,6 +40,7 @@
   list-style: none;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 .message .dice-rolls .d8-result {
   position: relative;
