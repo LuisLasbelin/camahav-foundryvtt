@@ -46,6 +46,8 @@
     list-style: none;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1em;
 
     .d8-result {
       position: relative;
