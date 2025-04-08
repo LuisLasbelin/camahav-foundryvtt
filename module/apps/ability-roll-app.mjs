@@ -170,8 +170,13 @@ class AbilityRoll extends FormApplication {
             }
         } // for each term
 
+
+        const roll_total = r._total - formData.target;
+
         const content = await renderTemplate('systems/camahav/templates/message/roll.hbs', {
-            total: r._total,
+            total: roll_total,
+            roll: r._total,
+            target: formData.target,
             status: this.actor.getStatusEffects(this.ability),
             results: results,
             performance: game.i18n.localize(CONFIG.CAMAHAV.actionResult[r._total]),

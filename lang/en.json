@@ -105,7 +105,8 @@
     "RequiredHands": "Required hands",
     "WeaponType": "Weapon type",
     "Level": "Level",
-    "NextLevel": "Next Level"
+    "NextLevel": "Next Level",
+    "Target": "Target"
   },
   "TYPES": {
     "Actor": {

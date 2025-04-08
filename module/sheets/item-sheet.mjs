@@ -63,7 +63,7 @@ export class CamahavItemSheet extends ItemSheet {
     context.abilities = CONFIG.CAMAHAV.abilities
     context.weaponTypes = CONFIG.CAMAHAV.weaponTypes
     context.damageDegree = CONFIG.CAMAHAV.damageDegree
-    if (this.item.actor) context.nextLevel = this.item.calculateSkillCost(this.item.actor, 1) - this.item.calculateSkillCost(this.item.actor)
+    if (this.item.actor && this.item.type === "skill") context.nextLevel = this.item.calculateSkillCost(this.item.actor, 1) - this.item.calculateSkillCost(this.item.actor)
     else context.nextLevel = 0
 
     console.log(context)

@@ -82,9 +82,9 @@ export class CamahavItem extends Item {
           "label": item.name
         },
         {
-          "value": item.actor.getRollData().abilities[item.ability].value,
+          "value": item.actor.getRollData().abilities[item.system.ability].value,
           "type": "ability",
-          "label": game.i18n.localize(CONFIG.CAMAHAV.abilities[item.ability])
+          "label": game.i18n.localize(CONFIG.CAMAHAV.abilities[item.system.ability])
         }
       ]).render(true)
   }
