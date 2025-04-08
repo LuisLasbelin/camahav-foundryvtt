@@ -84,6 +84,7 @@ export class CamahavActorSheet extends ActorSheet {
    */
   _prepareCharacterData(context) {
     context.pointBuy = 0
+    context.skillsTotal = 0
     // Handle ability scores.
     for (let [k, v] of Object.entries(context.system.abilities)) {
       v.label = game.i18n.localize(CONFIG.CAMAHAV.abilities[k]) ?? k;
@@ -91,15 +92,22 @@ export class CamahavActorSheet extends ActorSheet {
       else context.pointBuy = v.value;
     }
 
+    for (let item of context.items) {
+      // Only add up value of skills
+      if (item.type === "skill") {
+        if (item.system.value > 0) context.skillsTotal += this.actor.calculateSkillCost(item);
+      }
+    }
+
     context.status = {}
     for (let [k, v] of Object.entries(context.system.status)) {
       // add icon data
       v.config = CONFIG.CAMAHAV.Status[k]
-      
-      if(v.type == "physical" && v.value > context.system.vigor.value) {
+
+      if (v.type == "physical" && v.value > context.system.vigor.value) {
         context.status[k] = true
       }
-      if(v.type == "mental" && v.value > context.system.resolve.value) {
+      if (v.type == "mental" && v.value > context.system.resolve.value) {
         context.status[k] = true
       }
     }
@@ -195,8 +203,8 @@ export class CamahavActorSheet extends ActorSheet {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.items.get(li.data('itemId'));
       console.log(item)
-      if (item.system.equipped == 1) item.update({system: {equipped: 0}})
-      if (item.system.equipped == 0) item.update({system: {equipped: 1}})
+      if (item.system.equipped == 1) item.update({ system: { equipped: 0 } })
+      if (item.system.equipped == 0) item.update({ system: { equipped: 1 } })
     });
 
     // Add Inventory Item

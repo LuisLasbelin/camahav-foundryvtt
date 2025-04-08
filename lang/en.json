@@ -103,7 +103,9 @@
     "Equipment": "Equipment",
     "Defense": "Defense",
     "RequiredHands": "Required hands",
-    "WeaponType": "Weapon type"
+    "WeaponType": "Weapon type",
+    "Level": "Level",
+    "NextLevel": "Next Level"
   },
   "TYPES": {
     "Actor": {

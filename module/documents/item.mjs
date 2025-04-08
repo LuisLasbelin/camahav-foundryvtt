@@ -61,7 +61,7 @@ export class CamahavItem extends Item {
       const rollData = this.getRollData();
 
       // Invoke the roll and submit it to chat.
-      pRoll(this.actor, label, [rollData.formula]);
+      pRoll(item.actor, label, [rollData.formula]);
       return;
     }
   }
@@ -82,10 +82,31 @@ export class CamahavItem extends Item {
           "label": item.name
         },
         {
-          "value": this.actor.getRollData().abilities[item.ability].value,
+          "value": item.actor.getRollData().abilities[item.ability].value,
           "type": "ability",
           "label": game.i18n.localize(CONFIG.CAMAHAV.abilities[item.ability])
         }
       ]).render(true)
+  }
+
+  /**
+  * Calculates the cost of the level of the skill based on the level
+  * @param {Number} offset to add or substract to the current level
+  * 
+  * @returns {Number} total cost of the skill for the designed level
+  */
+  calculateSkillCost(actor, offset = 0, skill_difficulty = 2) {
+    let total = 0;
+    // Get the ability assigned value
+    const abilityValue = actor.getRollData().abilities[this.system.ability].value;
+
+    // for each level calculate the aggregated cost
+    for (let i = 1; i <= this.system.value + offset; i++) {
+      // if the level is lower than the assigned ability
+      if (i <= abilityValue) total += skill_difficulty;
+      if (i > abilityValue) total += 5 * (i - abilityValue) + skill_difficulty;
+    }
+
+    return total;
   }
 }

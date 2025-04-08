@@ -44,7 +44,8 @@ CAMAHAV.actionResult =[
   'CAMAHAV.Result.Legendary',
 ]
 
-CAMAHAV.pointBuy = [0, 0, 1, 3, 5, 8]
+CAMAHAV.pointBuy = [0, 0, 1, 3, 5, 8, 11, 15, 20, 25, 30]
+
 
 CAMAHAV.Roman = ["Nullus", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
 

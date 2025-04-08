@@ -4,8 +4,10 @@
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
       <div class="flexrow">
-        <label>{{localize "CAMAHAV.Skill"}}:</label>
+        <label class="resource-label">{{localize "CAMAHAV.Level"}}:</label>
         <input name="system.value" type="number" value="{{system.value}}" placeholder="0" />
+        <label class="resource-label">{{localize "CAMAHAV.NextLevel"}}:</label>
+        <input disabled="true" type="number" value="{{nextLevel}}" placeholder="0" />
       </div>
     </div>
   </header>

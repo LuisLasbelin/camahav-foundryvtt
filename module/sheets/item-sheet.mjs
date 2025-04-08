@@ -52,13 +52,6 @@ export class CamahavItemSheet extends ItemSheet {
     context.system = itemData.system;
     context.flags = itemData.flags;
 
-    // If it's a skill, add the abilities list
-    if(itemData.type == "skill") {
-      for (let [k, v] of Object.entries(context.system.abilities)) {
-        v.label = game.i18n.localize(CONFIG.CAMAHAV.abilities[k]) ?? k;
-      }
-    }
-
     // Prepare active effects for easier access
     context.effects = prepareActiveEffectCategories(this.item.effects);
 
@@ -70,6 +63,8 @@ export class CamahavItemSheet extends ItemSheet {
     context.abilities = CONFIG.CAMAHAV.abilities
     context.weaponTypes = CONFIG.CAMAHAV.weaponTypes
     context.damageDegree = CONFIG.CAMAHAV.damageDegree
+    if (this.item.actor) context.nextLevel = this.item.calculateSkillCost(this.item.actor, 1) - this.item.calculateSkillCost(this.item.actor)
+    else context.nextLevel = 0
 
     console.log(context)
     return context;
