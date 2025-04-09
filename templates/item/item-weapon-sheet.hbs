@@ -49,6 +49,10 @@
             <select class="ability-select" name="weaponType">
               {{selectOptions weaponTypes selected=weaponType localize=true}}
             </select>
+            <label class="resource-label">{{localize "CAMAHAV.Defense"}}</label>
+            <div class="flexrow">
+              <input name="system.defense" type="text" value="{{system.defense}}" data-dtype="Number" />
+            </div>
           </div>
         </div>
         <div>

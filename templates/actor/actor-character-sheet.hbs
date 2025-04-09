@@ -8,7 +8,7 @@
       {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
       use both the "grid" and "grid-Ncol" class where "N" can be any number
       from 1 to 12 and will create that number of columns. --}}
-      <div class="resources grid grid-2col">
+      <div class="resources grid grid-3col">
 
         {{!-- "flex-group-center" is also defined in the _grid.scss file
         and it will add a small amount of padding, a border, and will
@@ -28,6 +28,12 @@
             <input type="text" name="system.resolve.value" value="{{system.resolve.value}}" data-dtype="Number" />
             <span> / </span>
             <h4>{{system.resolve.max}}</h4>
+          </div>
+        </div>
+        <div class="resource flex-group-center">
+          <label for="defense" class="resource-label">{{localize 'CAMAHAV.Defense'}}</label>
+          <div class="resource-content flexrow flex-center flex-between">
+            <h4>{{defense}}</h4>
           </div>
         </div>
       </div>

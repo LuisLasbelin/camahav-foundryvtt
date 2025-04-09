@@ -139,6 +139,7 @@ export class CamahavActorSheet extends ActorSheet {
       7: [],
       8: []
     };
+    let defense = 0;
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
@@ -149,8 +150,14 @@ export class CamahavActorSheet extends ActorSheet {
       }
       // Append if it is equipped on the character
       else if (i.system.equipped > 0) {
-        if (i.type === "armor") armor.push(i);
-        if (i.type === "weapon" || i.type === "shield") weapons.push(i);
+        if (i.type === "armor") {
+          armor.push(i);
+          defense += i.system.defense;
+        }
+        if (i.type === "weapon" || i.type === "shield") {
+          weapons.push(i);
+          if (i.system.defense) defense += i.system.defense;
+        }
       }
       // Append to features.
       else if (i.type === 'feature') {
@@ -180,6 +187,7 @@ export class CamahavActorSheet extends ActorSheet {
     context.spells = spells;
     context.armor = armor;
     context.weapons = weapons;
+    context.defense = defense;
   }
 
   /* -------------------------------------------- */
