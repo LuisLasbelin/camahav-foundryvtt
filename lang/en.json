@@ -84,6 +84,9 @@
       "Passive": "Passive Effects",
       "Inactive": "Inactive Effects"
     },
+    "Chat": {
+      "RollLabel": "{speaker} uses {label}"
+    },
     "Weight": "Weight",
     "Quantity": "Quantity",
     "Description": "Description",

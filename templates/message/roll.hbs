@@ -1,5 +1,5 @@
 <div class="message flexcol" data-actor-id="{{actor._id}}">
-    <h3 class="label">{{localize label}}</h3>
+    <h3 class="label">{{localize 'CAMAHAV.Chat.RollLabel' speaker=actor.name label=label}}</h3>
     {{#if status}}
     <ol class="dice-rolls">
         {{#each status}}

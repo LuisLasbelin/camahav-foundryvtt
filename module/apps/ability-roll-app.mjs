@@ -13,7 +13,7 @@ class AbilityRoll extends FormApplication {
      * @param {Number} target_num target number for each roll
      * @param {Number} difficulty successes needed to be a success, defaults to 0 if there is no difficulty set
      */
-    constructor(actor, type = "", label = "", used_ability = "", rolls = [], critRange = 0, free_successes = 0, target_num = 4, difficulty = 0) {
+    constructor(actor, type = "", label = "", used_ability = "", rolls = [], critRange = 0, free_successes = 0, target_num = 4, difficulty = 0, weapon_id = "") {
         super();
         this.actor = actor;
         this.type = type;
@@ -24,6 +24,7 @@ class AbilityRoll extends FormApplication {
         this.difficulty = difficulty;
         this.target_num = target_num;
         this.free_successes = free_successes;
+        this.weapon_id = weapon_id;
     }
 
     static get defaultOptions() {
@@ -189,9 +190,9 @@ class AbilityRoll extends FormApplication {
 
         const roll_total = r._total - formData.target;
 
-        const content = await renderTemplate('systems/camahav/templates/message/roll.hbs', {
+        const messageData = {
             total: roll_total,
-            roll: r._total,
+            roll: r,
             target: formData.target,
             status: this.actor.getStatusEffects(this.ability),
             results: results,
@@ -200,13 +201,9 @@ class AbilityRoll extends FormApplication {
             label: this.label,
             critRange: this.critRange,
             critRolls: critRolls
-        })
+        }
 
-        r.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: content,
-            rollMode: game.settings.get('core', 'rollMode'),
-        })
+        return messageData;
     }
 
     /**
@@ -260,12 +257,27 @@ class AbilityRoll extends FormApplication {
         });
     }
 
+    async createMessage(messageData) {
+        const content = await renderTemplate('systems/camahav/templates/message/roll.hbs', messageData)
+
+        const msg = await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: content,
+            rollMode: game.settings.get('core', 'rollMode'),
+        })
+
+        // Render roll on DiceSoNice
+        if (game.modules.has("dice-so-nice")) game.dice3d.renderRolls(msg, [messageData.roll]);
+    }
+
     async _updateObject(event, formData) {
         if (formData.status) {
             this.statusRoll(event, formData);
             return;
         }
-        this.pRoll(event, formData);
+        const messageData = await this.pRoll(event, formData);
+        
+        this.createMessage(messageData);
         return;
     }
 }

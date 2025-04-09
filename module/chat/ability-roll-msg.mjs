@@ -21,7 +21,10 @@ async function onCritRoll(event) {
     for (const term of roll.terms) {
         var temp_r = term.results
         for (let i = 0; i < temp_r.length; i++) {
-            if (temp_r[i].result == 8) temp_r[i].success = 1;
+            if (temp_r[i].result == 8) { 
+                temp_r[i].success = 1;
+                roll_total += 1;
+            }
             else temp_r[i].not = 1
         }
         results.push(temp_r)
