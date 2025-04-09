@@ -179,6 +179,7 @@
       ],
       "weight": 1,
       "hands": 1,
+      "requiredHands": 1,
       "traits": [],
       "criticalAvoid": 1,
       "isAdvanced": 0,
