@@ -13,13 +13,14 @@ class AbilityRoll extends FormApplication {
      * @param {Number} target_num target number for each roll
      * @param {Number} difficulty successes needed to be a success, defaults to 0 if there is no difficulty set
      */
-    constructor(actor, type = "", label = "", used_ability = "", rolls = [], free_successes = 0, target_num = 4, difficulty = 0) {
+    constructor(actor, type = "", label = "", used_ability = "", rolls = [], critRange = 0, free_successes = 0, target_num = 4, difficulty = 0) {
         super();
         this.actor = actor;
         this.type = type;
         this.label = label;
         this.used_ability = used_ability;
         this.rolls = rolls;
+        this.critRange = critRange;
         this.difficulty = difficulty;
         this.target_num = target_num;
         this.free_successes = free_successes;
@@ -65,6 +66,10 @@ class AbilityRoll extends FormApplication {
         });
     }
 
+    async critRoll(event, dice) {
+        console.log(event)
+    }
+
     /**
      * Make a Poisson Roll with the form data
      * @param {*} event 
@@ -108,7 +113,10 @@ class AbilityRoll extends FormApplication {
 
         await r.evaluate();
 
-        r._total = 0
+        r._total = 0;
+
+        // Add a crit roll with each 8 in the dice rolled
+        let critRolls = 0;
 
         for (const term of r.terms) {
 
@@ -137,7 +145,10 @@ class AbilityRoll extends FormApplication {
 
                 var temp_r = term.results;
                 for (let i = 0; i < temp_r.length; i++) {
-                    if (temp_r[i].result == 8) temp_r[i].success = 1
+                    if (temp_r[i].result == 8) {
+                        temp_r[i].success = 1;
+                        critRolls += 1;
+                    }
                     else if (temp_r[i].result < 8) temp_r[i].not = 1
                 }
                 results.push(temp_r);
@@ -149,7 +160,10 @@ class AbilityRoll extends FormApplication {
 
                 var temp_r = term.results
                 for (let i = 0; i < temp_r.length; i++) {
-                    if (temp_r[i].result == 8) temp_r[i].double = 1
+                    if (temp_r[i].result == 8) {
+                        temp_r[i].double = 1;
+                        critRolls += 1;
+                    }
                     else if (temp_r[i].result == 7) temp_r[i].success = 1
                     else if (temp_r[i].result < 7) temp_r[i].not = 1
                 }
@@ -161,7 +175,10 @@ class AbilityRoll extends FormApplication {
 
                 var temp_r = term.results
                 for (let i = 0; i < temp_r.length; i++) {
-                    if (temp_r[i].result == 8) temp_r[i].triple = 1
+                    if (temp_r[i].result == 8) {
+                        temp_r[i].triple = 1;
+                        critRolls += 1;
+                    }
                     else if (temp_r[i].result == 7) temp_r[i].double = 1
                     else if (temp_r[i].result >= this.target_num) temp_r[i].success = 1
                     else if (temp_r[i].result < this.target_num) temp_r[i].not = 1
@@ -169,7 +186,6 @@ class AbilityRoll extends FormApplication {
                 results.push(temp_r)
             }
         } // for each term
-
 
         const roll_total = r._total - formData.target;
 
@@ -181,14 +197,16 @@ class AbilityRoll extends FormApplication {
             results: results,
             performance: game.i18n.localize(CONFIG.CAMAHAV.actionResult[r._total]),
             actor: this.actor,
-            label: this.label
+            label: this.label,
+            critRange: this.critRange,
+            critRolls: critRolls
         })
 
         r.toMessage({
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: content,
             rollMode: game.settings.get('core', 'rollMode'),
-        });
+        })
     }
 
     /**
@@ -210,13 +228,18 @@ class AbilityRoll extends FormApplication {
 
         r._total = 0
 
+        let critRolls = 0;
+
         for (const term of r.terms) {
 
             r._total += term.results.filter((el) => el.result == 8).length
 
             var temp_r = term.results;
             for (let i = 0; i < temp_r.length; i++) {
-                if (temp_r[i].result == 8) temp_r[i].success = 1
+                if (temp_r[i].result == 8) {
+                    temp_r[i].success = 1;
+                    critRolls += 1;
+                }
                 else if (temp_r[i].result < 8) temp_r[i].not = 1
             }
             results.push(temp_r);

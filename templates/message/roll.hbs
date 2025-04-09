@@ -1,5 +1,5 @@
-<div class="message flexcol">
-    <h3 class="label">{{label}}</h3>
+<div class="message flexcol" data-actor-id="{{actor._id}}">
+    <h3 class="label">{{localize label}}</h3>
     {{#if status}}
     <ol class="dice-rolls">
         {{#each status}}
@@ -19,6 +19,12 @@
     </ol>
     <div class="flexcol flex-center roll-result">
         <h4>{{total}}</h4>
+        {{#if critRolls}}
+        <a class="crit"><i class="far fa-explosion"></i></a>
+        {{/if}}
     </div>
+    {{#if target}}
     <p>{{localize "CAMAHAV.Target"}}: {{target}}</p>
+    {{/if}}
+
 </div>

@@ -7,6 +7,7 @@ import { CamahavItemSheet } from './sheets/item-sheet.mjs';
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { CAMAHAV } from './helpers/config.mjs';
+import { addChatListeners } from './chat/ability-roll-msg.mjs';
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -145,3 +146,6 @@ function rollItemMacro(itemUuid) {
     item.roll();
   });
 }
+
+// Add crit roll button litener to messages
+Hooks.on("renderChatLog", (app, html, data) => addChatListeners(html))
