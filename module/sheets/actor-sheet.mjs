@@ -89,7 +89,7 @@ export class CamahavActorSheet extends ActorSheet {
     for (let [k, v] of Object.entries(context.system.abilities)) {
       v.label = game.i18n.localize(CONFIG.CAMAHAV.abilities[k]) ?? k;
       if (v.value > 0) context.pointBuy += CONFIG.CAMAHAV.pointBuy[v.value];
-      else context.pointBuy = v.value;
+      else context.pointBuy += v.value;
     }
 
     for (let item of context.items) {
@@ -140,9 +140,12 @@ export class CamahavActorSheet extends ActorSheet {
       8: []
     };
     let defense = 0;
+    let totalCarry = 0;
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
+      if (i.system.weight) totalCarry += i.system.weight;
+
       i.img = i.img || Item.DEFAULT_ICON;
       // Append to gear if it's not equipped
       if (gear_types.includes(i.type) && !i.system.equipped) {
@@ -188,6 +191,8 @@ export class CamahavActorSheet extends ActorSheet {
     context.armor = armor;
     context.weapons = weapons;
     context.defense = defense;
+    context.totalCarry = totalCarry;
+    context.maxCarry = (context.system.abilities.str.value + context.system.abilities.con.value) * 2;
   }
 
   /* -------------------------------------------- */
