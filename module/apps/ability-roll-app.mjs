@@ -43,6 +43,10 @@ class AbilityRoll extends FormApplication {
         for (const key in CONFIG.CAMAHAV.abilities) {
             status.push({ ability: key, effects: this.actor.getStatusEffects(key) })
         }
+        let used_ability = "";
+        if (this.rolls.filter((v) => v.type === "ability")[0]) {
+            used_ability = this.rolls.filter((v) => v.type === "ability")[0].origin;
+        }
         // Send data to the template
         return {
             status: status,
@@ -51,7 +55,7 @@ class AbilityRoll extends FormApplication {
             rolls: this.rolls,
             free_successes: this.free_successes,
             abilities: CONFIG.CAMAHAV.abilities,
-            used_ability: this.rolls.filter((v)=> v.type === "ability")[0].origin
+            used_ability: used_ability
         };
     }
 
@@ -132,8 +136,7 @@ class AbilityRoll extends FormApplication {
             if (dice < -1) {
                 results.push({ result: 0, not: 1 })
             }
-
-            if (dice == -1) {
+            else if (dice == -1 || this.type === "Status") {
 
                 r._total += term.results.filter((el) => el.result == 8).length
 
@@ -147,9 +150,8 @@ class AbilityRoll extends FormApplication {
                     if (temp_r[i].result == 1) blunderRolls += 1;
                 }
                 results.push(temp_r);
-            }
-
-            if (dice == 0) {
+            } 
+            else if (dice == 0) {
 
                 r._total += term.results.filter((el) => el.result >= 7).length + term.results.filter((el) => el.result == 8).length
 
@@ -165,8 +167,7 @@ class AbilityRoll extends FormApplication {
                 }
                 results.push(temp_r);
             }
-
-            if (dice > 0) {
+            else if (dice > 0) {
                 r._total += term.results.filter((el) => el.result >= this.target_num).length + term.results.filter((el) => el.result >= 7).length + term.results.filter((el) => el.result == 8).length
 
                 var temp_r = term.results
@@ -213,61 +214,6 @@ class AbilityRoll extends FormApplication {
         return messageData;
     }
 
-    /**
-     * Makes a roll to reduce status effect
-     * @param {*} event 
-     * @param {*} formData 
-     */
-    async statusRoll(event, formData) {
-
-        console.log(formData)
-
-        var results = []
-        var formula = formData.status + "d8[status]"
-
-        // Create the roll with the formula
-        var r = new Roll(formula);
-
-        await r.evaluate();
-
-        r._total = 0
-
-        let critRolls = 0;
-        let blunderRolls = 0;
-
-        for (const term of r.terms) {
-
-            r._total += term.results.filter((el) => el.result == 8).length
-
-            var temp_r = term.results;
-            for (let i = 0; i < temp_r.length; i++) {
-                if (temp_r[i].result == 8) {
-                    temp_r[i].success = 1;
-                    critRolls += 1;
-                }
-                else if (temp_r[i].result < 8) temp_r[i].not = 1
-                if (temp_r[i].result == 1) blunderRolls += 1;
-            }
-            results.push(temp_r);
-        }
-
-        const content = await renderTemplate('systems/camahav/templates/message/roll.hbs', {
-            total: r._total,
-            results: results,
-            performance: game.i18n.localize(CONFIG.CAMAHAV.actionResult[r._total]),
-            actor: this.actor,
-            label: this.label,
-            blunderRolls: blunderRolls,
-            critRolls: critRolls
-        })
-
-        r.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: content,
-            rollMode: game.settings.get('core', 'rollMode'),
-        });
-    }
-
     async createMessage(messageData) {
         const content = await renderTemplate('systems/camahav/templates/message/roll.hbs', messageData)
 
@@ -283,7 +229,7 @@ class AbilityRoll extends FormApplication {
 
     async _updateObject(event, formData) {
         const messageData = await this.pRoll(event, formData);
-        
+
         this.createMessage(messageData);
         return;
     }
