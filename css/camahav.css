@@ -336,6 +336,13 @@
 .camahav .tox .tox-edit-area {
   padding: 0 8px;
 }
+.camahav input {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-radius: 0;
+  border-bottom: solid 1px #443627;
+}
 .camahav .title {
   background-repeat: no-repeat;
   background-position-x: left;
@@ -422,11 +429,16 @@
 .camahav .items-list .item-controls {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 .camahav .items-list .item-controls a {
   font-size: 12px;
   text-align: center;
   margin: 0 6px;
+}
+.camahav .items-list .item-controls input {
+  border: none;
+  flex: 0;
 }
 .camahav .items-list .item {
   align-items: center;

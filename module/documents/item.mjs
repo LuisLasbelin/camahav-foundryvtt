@@ -74,8 +74,6 @@ export class CamahavItem extends Item {
     const item = this;
     const rollData = this.getRollData();
 
-    console.log(this.actor.items)
-
     const skill = this.actor.items.filter((e)=>e.system.id === rollData.weaponType)[0].getRollData()
 
     return new AbilityRoll(

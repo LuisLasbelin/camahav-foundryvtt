@@ -52,7 +52,7 @@
         </div>
         <h4>{{item.name}}</h4>
       </div>
-      <div class='item-value item-prop'>{{item.system.value}}</div>
+      <div class='item-value item-prop'>{{item.system.value}}{{#if item.system.class}}<i class="far fa-star"></i>{{/if}}</div>
       <div class='item-controls'>
         <a class='item-control item-edit' title='{{localize "DOCUMENT.Edit" type=' skill'}}'>
           <i class='fas fa-edit'></i>

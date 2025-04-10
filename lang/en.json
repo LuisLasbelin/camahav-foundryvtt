@@ -169,7 +169,11 @@
     "Level": "Level",
     "NextLevel": "Next Level",
     "Target": "Target",
-    "Crit": "Crit"
+    "Crit": "Crit",
+    "MaxCarry": "Maximum weight",
+    "TotalCarry": "Total weight",
+    "Silver": "Silver",
+    "Copper": "Copper"
   },
   "TYPES": {
     "Actor": {

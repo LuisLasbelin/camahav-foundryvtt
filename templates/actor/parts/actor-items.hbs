@@ -1,5 +1,15 @@
-<div>{{localize "CAMAHAV.MaxCarry" }}: {{maxCarry}}</div>
-<div>{{localize "CAMAHAV.TotalCarry" }}: {{totalCarry}}</div>
+<div class="grid-2col">
+  <div>
+    <div>{{localize "CAMAHAV.MaxCarry" }}: {{maxCarry}}</div>
+    <div>{{localize "CAMAHAV.TotalCarry" }}: {{totalCarry}}</div>
+  </div>
+  <div>
+    <div class="flexrow"><span class="flexshrink">{{localize "CAMAHAV.Silver"}}: </span><input name="system.coins.silver" value="{{system.coins.silver}}" type="text"
+        data-dtype="Number" /></div>
+    <div class="flexrow"><span class="flexshrink">{{localize "CAMAHAV.Copper"}}: </span><input name="system.coins.copper" value="{{system.coins.copper}}" type="text"
+        data-dtype="Number" /></div>
+  </div>
+</div>
 <div class="grid-2col">
   {{!--ITEMS--}}
   <ol class='items-list'>
@@ -23,7 +33,12 @@
         <h4>{{item.name}}</h4>
       </div>
       <div class='item-controls'>
-        {{#if system.equipped includeZero=true}}
+        {{#if item.system.uses.max}}
+        <input class="item-uses" value="{{item.system.uses.value}}" type="text" data-dtype="Number" />
+        /
+        <span>{{item.system.uses.max}}</span>
+        {{/if}}
+        {{#if item.system.equipped includeZero=true}}
         <a class='item-control item-equip' title='{{localize "DOCUMENT.Wear" type=' Armor'}}'>
           <i class='far fa-shirt'></i>
         </a>

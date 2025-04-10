@@ -59,10 +59,15 @@
   .item-controls {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     a {
       font-size: 12px;
       text-align: center;
       margin: 0 6px;
+    }
+    input {
+      border: none;
+      flex: 0;
     }
   }
 

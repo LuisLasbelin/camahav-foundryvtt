@@ -31,13 +31,7 @@
       <div class="resource">
         <label class="resource-label">{{localize 'CAMAHAV.Element'}}</label>
         <select name="system.element">
-          {{selectOptions elements value=system.element localize=true}}
-        </select>
-      </div>
-      <div class="resource">
-        <label class="resource-label">{{localize 'CAMAHAV.Sigil'}}</label>
-        <select name="system.sigil">
-          {{selectOptions sigils value=system.sigil localize=true}}
+          {{selectOptions elements selected=system.element localize=true}}
         </select>
       </div>
     </div>

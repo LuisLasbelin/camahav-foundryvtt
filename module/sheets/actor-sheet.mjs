@@ -215,9 +215,14 @@ export class CamahavActorSheet extends ActorSheet {
     html.on('click', '.item-equip', (ev) => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.items.get(li.data('itemId'));
-      console.log(item)
       if (item.system.equipped == 1) item.update({ system: { equipped: 0 } })
       if (item.system.equipped == 0) item.update({ system: { equipped: 1 } })
+    });
+
+    html.on('change', '.item-uses', (ev) => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.items.get(li.data('itemId'));
+      item.update({ system: { uses: {value: ev.currentTarget.value} } })
     });
 
     html.on('click', '.item-attack', (ev) => {

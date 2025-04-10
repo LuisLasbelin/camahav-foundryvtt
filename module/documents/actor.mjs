@@ -176,7 +176,6 @@ export class CamahavActor extends Actor {
         ]).render(true)
     }
     if (type == "status") {
-      console.log(ability)
       return new AbilityRoll(
         this,
         data,
@@ -204,7 +203,6 @@ export class CamahavActor extends Actor {
     const rollData = item.system;
     // Get the ability assigned value
     const abilityValue = Math.max(0, this.getRollData().abilities[rollData.ability].value);
-    console.log(abilityValue)
     let skill_difficulty = 2;
     if (rollData.class) skill_difficulty = 1;
     if (rollData.advanced) skill_difficulty = 3;

@@ -186,8 +186,7 @@
         "base"
       ],
       "quantity": 1,
-      "weight": 0,
-      "formula": "2"
+      "weight": 0
     },
     "feature": {
       "templates": [
@@ -200,7 +199,6 @@
       ],
       "spellLevel": 1,
       "element": "water",
-      "sigil": "modify",
       "origin": "arcane",
       "isRitual": 0
     }
