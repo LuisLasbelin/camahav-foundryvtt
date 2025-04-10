@@ -41,6 +41,14 @@
           {{selectOptions skills selected=system.id localize=true}}
         </select>
       </div>
+      <div class="resource">
+        <label class="resource-label">{{localize "CAMAHAV.Class"}}</label>
+        <input name="system.class" type="checkbox" {{checked system.class}} data-dtype="Boolean" />
+      </div>
+      <div class="resource">
+        <label class="resource-label">{{localize "CAMAHAV.Advanced"}}</label>
+        <input name="system.advanced" type="checkbox" {{checked system.advanced}} data-dtype="Boolean" />
+      </div>
     </div>
   </section>
 </form>

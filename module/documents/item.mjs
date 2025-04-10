@@ -132,10 +132,14 @@ export class CamahavItem extends Item {
   * 
   * @returns {Number} total cost of the skill for the designed level
   */
-  calculateSkillCost(actor, offset = 0, skill_difficulty = 2) {
+  calculateSkillCost(actor, offset = 0) {
     let total = 0;
     // Get the ability assigned value
-    const abilityValue = actor.getRollData().abilities[this.system.ability].value;
+    const abilityValue = Math.max(0, this.actor.getRollData().abilities[this.system.ability].value);
+
+    let skill_difficulty = 2;
+    if (this.system.class) skill_difficulty = 1;
+    if (this.system.advanced) skill_difficulty = 3;
 
     // for each level calculate the aggregated cost
     for (let i = 1; i <= this.system.value + offset; i++) {
