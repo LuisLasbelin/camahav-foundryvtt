@@ -5,7 +5,9 @@ export function addChatListeners(html) {
 async function onCritRoll(event) {
     const card = event.currentTarget.closest(".message");
     const diceRolled = card.querySelectorAll('.d8-result')
-    const actor = card.dataset.actorId;
+    const actor = game.actors.get(card.dataset.actorId);
+
+    console.log(actor)
 
     let critRolls = 0;
     for (const r of diceRolled) {
@@ -34,7 +36,7 @@ async function onCritRoll(event) {
         total: roll_total,
         results: results,
         actor: actor,
-        label: "CAMAHAV.Crit"
+        label: game.i18n.localize("CAMAHAV.Crit")
     })
 
     roll.toMessage({
