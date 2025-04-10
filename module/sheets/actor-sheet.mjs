@@ -220,6 +220,12 @@ export class CamahavActorSheet extends ActorSheet {
       if (item.system.equipped == 0) item.update({ system: { equipped: 1 } })
     });
 
+    html.on('click', '.item-attack', (ev) => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.items.get(li.data('itemId'));
+      if (item) return item.attack();
+    });
+
     // Add Inventory Item
     html.on('click', '.item-create', this._onItemCreate.bind(this));
 

@@ -66,15 +66,51 @@ export class CamahavItem extends Item {
     }
   }
 
+  /**
+   * Handle attack rolls
+   * @returns 
+   */
+  async attack() {
+    const item = this;
+    const rollData = this.getRollData();
+
+    console.log(this.actor.items)
+
+    const skill = this.actor.items.filter((e)=>e.system.id === rollData.weaponType)[0].getRollData()
+
+    return new AbilityRoll(
+      this.actor,
+      rollData,
+      "Attack",
+      item.name,
+      [
+        {
+          "value": skill.value,
+          "type": "skill",
+          "label": rollData.weaponType
+        },
+        {
+          "value": this.actor.getRollData().abilities[skill.ability].value,
+          "type": "ability",
+          "origin": skill.ability,
+          "label": game.i18n.localize(CONFIG.CAMAHAV.abilities[skill.ability])
+        }
+      ]).render(true)
+  }
+
+  /**
+   * Handle skill rolls
+   * @returns 
+   */
   async rollSkill() {
     const item = this;
     const rollData = this.getRollData();
 
     return new AbilityRoll(
       this.actor,
+      rollData,
       "Skill",
       item.name,
-      item.ability,
       [
         {
           "value": rollData.value,
@@ -84,6 +120,7 @@ export class CamahavItem extends Item {
         {
           "value": item.actor.getRollData().abilities[item.system.ability].value,
           "type": "ability",
+          "origin": item.system.ability,
           "label": game.i18n.localize(CONFIG.CAMAHAV.abilities[item.system.ability])
         }
       ]).render(true)

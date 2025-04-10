@@ -5,6 +5,7 @@ class AbilityRoll extends FormApplication {
     /**
      * 
      * @param {Actor} actor 
+     * @param {Object} rollData has to be the rollData of the item, skill or weapon rolled
      * @param {String} type can be ability, skill, item or binary
      * @param {String} label to show on the message
      * @param {String} ability represents the 3-letter ability used to set Status Effects
@@ -13,18 +14,17 @@ class AbilityRoll extends FormApplication {
      * @param {Number} target_num target number for each roll
      * @param {Number} difficulty successes needed to be a success, defaults to 0 if there is no difficulty set
      */
-    constructor(actor, type = "", label = "", used_ability = "", rolls = [], critRange = 0, free_successes = 0, target_num = 4, difficulty = 0, weapon_id = "") {
+    constructor(actor, rollData, type = "", label = "", rolls = [], critRange = 0, free_successes = 0, target_num = 4, difficulty = 0) {
         super();
         this.actor = actor;
+        this.rollData = rollData;
         this.type = type;
         this.label = label;
-        this.used_ability = used_ability;
         this.rolls = rolls;
         this.critRange = critRange;
         this.difficulty = difficulty;
         this.target_num = target_num;
         this.free_successes = free_successes;
-        this.weapon_id = weapon_id;
     }
 
     static get defaultOptions() {
@@ -49,22 +49,14 @@ class AbilityRoll extends FormApplication {
             label: this.label,
             penalties: this.roll_penalties,
             rolls: this.rolls,
-            used_ability: this.used_ability,
             free_successes: this.free_successes,
-            abilities: CONFIG.CAMAHAV.abilities
+            abilities: CONFIG.CAMAHAV.abilities,
+            used_ability: this.rolls.filter((v)=> v.type === "ability")[0].origin
         };
     }
 
     activateListeners(html) {
         super.activateListeners(html);
-
-        // Update status effects when choosing an ability
-        html.on('change', '.ability-select', (ev) => {
-            const select = ev.currentTarget;
-            console.log(select)
-            this.used_ability = select.value;
-            this.render(true)
-        });
     }
 
     async critRoll(event, dice) {
@@ -190,6 +182,15 @@ class AbilityRoll extends FormApplication {
 
         const roll_total = r._total - formData.target;
 
+        let attackFormula = ""
+        // if it's an attack, add the attack stuff
+        if (this.type == "Attack") {
+            if (this.rollData.damage === "weak") attackFormula = roll_total;
+            if (this.rollData.damage === "medium") attackFormula = roll_total + this.actor.getRollData().abilities.str.value;
+            if (this.rollData.damage === "strong") attackFormula = roll_total + (this.actor.getRollData().abilities.str.value * 2);
+        }
+        console.log(attackFormula)
+
         const messageData = {
             total: roll_total,
             roll: r,
@@ -200,7 +201,8 @@ class AbilityRoll extends FormApplication {
             actor: this.actor,
             label: this.label,
             critRange: this.critRange,
-            critRolls: critRolls
+            critRolls: critRolls,
+            attack: attackFormula
         }
 
         return messageData;
@@ -271,10 +273,6 @@ class AbilityRoll extends FormApplication {
     }
 
     async _updateObject(event, formData) {
-        if (formData.status) {
-            this.statusRoll(event, formData);
-            return;
-        }
         const messageData = await this.pRoll(event, formData);
         
         this.createMessage(messageData);

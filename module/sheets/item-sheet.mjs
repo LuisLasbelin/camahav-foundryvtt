@@ -66,6 +66,9 @@ export class CamahavItemSheet extends ItemSheet {
     if (this.item.actor && this.item.type === "skill") context.nextLevel = this.item.calculateSkillCost(this.item.actor, 1) - this.item.calculateSkillCost(this.item.actor)
     else context.nextLevel = 0
 
+
+    context.skills = CONFIG.CAMAHAV.skills;
+
     console.log(context)
     return context;
   }
