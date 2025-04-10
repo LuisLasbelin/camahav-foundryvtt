@@ -25,8 +25,20 @@
     <div class="tab attributes" data-group="primary" data-tab="attributes">
       {{!-- As you add new fields, add them in here! --}}
       <div class="resource">
-        <label class="resource-label">Spell Level</label>
+        <label class="resource-label">{{localize 'Level'}}</label>
         <input type="text" name="system.spellLevel" value="{{system.spellLevel}}" data-dtype="Number"/>
+      </div>
+      <div class="resource">
+        <label class="resource-label">{{localize 'CAMAHAV.Element'}}</label>
+        <select name="system.element">
+          {{selectOptions elements value=system.element localize=true}}
+        </select>
+      </div>
+      <div class="resource">
+        <label class="resource-label">{{localize 'CAMAHAV.Sigil'}}</label>
+        <select name="system.sigil">
+          {{selectOptions sigils value=system.sigil localize=true}}
+        </select>
       </div>
     </div>
   </section>

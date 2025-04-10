@@ -68,6 +68,8 @@ export class CamahavItemSheet extends ItemSheet {
 
 
     context.skills = CONFIG.CAMAHAV.skills;
+    context.sigils = CONFIG.CAMAHAV.sigils;
+    context.elements = CONFIG.CAMAHAV.elements;
 
     console.log(context)
     return context;

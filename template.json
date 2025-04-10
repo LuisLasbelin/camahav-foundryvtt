@@ -196,7 +196,11 @@
       "templates": [
         "base"
       ],
-      "spellLevel": 1
+      "spellLevel": 1,
+      "element": "water",
+      "sigil": "modify",
+      "origin": "arcane",
+      "isRitual": 0
     }
   }
 }
