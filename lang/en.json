@@ -55,7 +55,8 @@
       "Polearm": "Polearm",
       "Heavy": "Heavy weapon",
       "Thrown": "Thrown weapon",
-      "Fight": "Fighting weapon"
+      "Fight": "Fighting weapon",
+      "Ranged": "Ranged weapon"
     },
     "RollValue": "Dice to roll",
     "StatusEffects": "Status effects",
@@ -97,7 +98,7 @@
         "onehanded": "One hand weapons",
         "polearm": "Polearms",
         "heavy": "Heavy weapons",
-        "distance": "Ranged weapons",
+        "ranged": "Ranged weapons",
         "thrown": "Thrown weapons",
         "fight": "Fighting",
         "defense": "Defense",

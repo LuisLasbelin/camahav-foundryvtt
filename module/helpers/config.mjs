@@ -63,7 +63,8 @@ CAMAHAV.weaponTypes = {
   "polearm": "CAMAHAV.WeaponTypes.Polearm",
   "heavy": "CAMAHAV.WeaponTypes.Heavy",
   "thrown": "CAMAHAV.WeaponTypes.Thrown",
-  "fight": "CAMAHAV.WeaponTypes.Fight"
+  "fight": "CAMAHAV.WeaponTypes.Fight",
+  "ranged": "CAMAHAV.WeaponTypes.Ranged"
 }
 
 CAMAHAV.damageDegree = {
@@ -99,7 +100,7 @@ CAMAHAV.skills = {
   "onehanded": "CAMAHAV.Item.Skill.onehanded",
   "polearm": "CAMAHAV.Item.Skill.polearm",
   "heavy": "CAMAHAV.Item.Skill.heavy",
-  "distance": "CAMAHAV.Item.Skill.distance",
+  "ranged": "CAMAHAV.Item.Skill.ranged",
   "thrown": "CAMAHAV.Item.Skill.thrown",
   "fight": "CAMAHAV.Item.Skill.fight",
   "defense": "CAMAHAV.Item.Skill.defense",
