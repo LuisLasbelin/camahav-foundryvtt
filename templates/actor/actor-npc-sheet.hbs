@@ -14,32 +14,22 @@
         and it will add a small amount of padding, a border, and will
         center all of its child elements content and text. --}}
         <div class="resource flex-group-center">
-          <label for="system.health.value" class="resource-label">Health</label>
+          <label for="system.vigor.value" class="resource-label">{{localize 'CAMAHAV.Vigor'}}</label>
           <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="system.health.value" value="{{system.health.value}}" data-dtype="Number"/>
+            <input type="text" name="system.vigor.value" value="{{system.vigor.value}}" data-dtype="Number"/>
             <span> / </span>
-            <input type="text" name="system.health.max" value="{{system.health.max}}" data-dtype="Number"/>
+            <input type="text" name="system.vigor.max" value="{{system.vigor.max}}" data-dtype="Number"/>
           </div>
         </div>
 
         <div class="resource flex-group-center">
-          <label for="system.power.value" class="resource-label">Power</label>
+          <label for="system.resolve.value" class="resource-label">{{localize 'CAMAHAV.Resolve'}}</label>
           <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="system.power.value" value="{{system.power.value}}" data-dtype="Number"/>
+            <input type="text" name="system.resolve.value" value="{{system.resolve.value}}" data-dtype="Number"/>
             <span> / </span>
-            <input type="text" name="system.power.max" value="{{system.power.max}}" data-dtype="Number"/>
+            <input type="text" name="system.resolve.max" value="{{system.resolve.max}}" data-dtype="Number"/>
           </div>
         </div>
-
-        <div class="resource flex-group-center">
-          <label for="system.cr" class="resource-label">CR / XP</label>
-          <div class="resource-content flexrow flex-center flex-between">
-            <input type="text" name="system.cr" value="{{system.cr}}" data-dtype="Number"/>
-            <span> / </span>
-            <input type="text" disabled="true" name="system.xp" value="{{system.xp}}" data-dtype="Number"/>
-          </div>
-        </div>
-
       </div>
     </div>
   </header>

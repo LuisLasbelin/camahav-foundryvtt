@@ -110,6 +110,7 @@ class AbilityRoll extends FormApplication {
 
         // Add a crit roll with each 8 in the dice rolled
         let critRolls = 0;
+        let blunderRolls = 0;
 
         for (const term of r.terms) {
 
@@ -143,6 +144,7 @@ class AbilityRoll extends FormApplication {
                         critRolls += 1;
                     }
                     else if (temp_r[i].result < 8) temp_r[i].not = 1
+                    if (temp_r[i].result == 1) blunderRolls += 1;
                 }
                 results.push(temp_r);
             }
@@ -159,6 +161,7 @@ class AbilityRoll extends FormApplication {
                     }
                     else if (temp_r[i].result == 7) temp_r[i].success = 1
                     else if (temp_r[i].result < 7) temp_r[i].not = 1
+                    if (temp_r[i].result == 1) blunderRolls += 1;
                 }
                 results.push(temp_r);
             }
@@ -175,6 +178,7 @@ class AbilityRoll extends FormApplication {
                     else if (temp_r[i].result == 7) temp_r[i].double = 1
                     else if (temp_r[i].result >= this.target_num) temp_r[i].success = 1
                     else if (temp_r[i].result < this.target_num) temp_r[i].not = 1
+                    if (temp_r[i].result == 1) blunderRolls += 1;
                 }
                 results.push(temp_r)
             }
@@ -202,6 +206,7 @@ class AbilityRoll extends FormApplication {
             label: this.label,
             critRange: this.critRange,
             critRolls: critRolls,
+            blunderRolls: blunderRolls,
             attack: attackFormula
         }
 
@@ -228,6 +233,7 @@ class AbilityRoll extends FormApplication {
         r._total = 0
 
         let critRolls = 0;
+        let blunderRolls = 0;
 
         for (const term of r.terms) {
 
@@ -240,6 +246,7 @@ class AbilityRoll extends FormApplication {
                     critRolls += 1;
                 }
                 else if (temp_r[i].result < 8) temp_r[i].not = 1
+                if (temp_r[i].result == 1) blunderRolls += 1;
             }
             results.push(temp_r);
         }
@@ -249,7 +256,9 @@ class AbilityRoll extends FormApplication {
             results: results,
             performance: game.i18n.localize(CONFIG.CAMAHAV.actionResult[r._total]),
             actor: this.actor,
-            label: this.label
+            label: this.label,
+            blunderRolls: blunderRolls,
+            critRolls: critRolls
         })
 
         r.toMessage({
