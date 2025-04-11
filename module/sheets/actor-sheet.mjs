@@ -111,6 +111,8 @@ export class CamahavActorSheet extends ActorSheet {
         context.status[k] = true
       }
     }
+
+    context.maxCarry = (context.system.abilities.str.value + context.system.abilities.con.value) * 2;
   }
 
   /**
@@ -192,7 +194,6 @@ export class CamahavActorSheet extends ActorSheet {
     context.weapons = weapons;
     context.defense = defense;
     context.totalCarry = totalCarry;
-    context.maxCarry = (context.system.abilities.str.value + context.system.abilities.con.value) * 2;
   }
 
   /* -------------------------------------------- */

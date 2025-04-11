@@ -6,14 +6,6 @@
     ],
     "templates": {
       "base": {
-        "vigor": {
-          "max": 0,
-          "value": 0
-        },
-        "resolve": {
-          "max": 0,
-          "value": 0
-        },
         "biography": ""
       }
     },
@@ -21,6 +13,14 @@
       "templates": [
         "base"
       ],
+      "vigor": {
+        "max": 0,
+        "value": 0
+      },
+      "resolve": {
+        "max": 0,
+        "value": 0
+      },
       "attributes": {
         "level": {
           "value": 1
@@ -113,8 +113,12 @@
       "templates": [
         "base"
       ],
-      "trais": [],
-      "treasure": []
+      "traits": [],
+      "treasure": [],
+      "defeat": {
+        "value": 0,
+        "max": 1
+      }
     }
   },
   "Item": {
