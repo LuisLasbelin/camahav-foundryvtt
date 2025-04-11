@@ -201,7 +201,7 @@
       "templates": [
         "base"
       ],
-      "spellLevel": 1,
+      "isAdvanced": 0,
       "element": "water",
       "origin": "arcane",
       "isRitual": 0

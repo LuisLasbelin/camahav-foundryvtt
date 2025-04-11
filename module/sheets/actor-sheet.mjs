@@ -132,14 +132,15 @@ export class CamahavActorSheet extends ActorSheet {
     const classes = [];
     const skills = [];
     const spells = {
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-      7: [],
-      8: []
+      "fire": [],
+      "water": [],
+      "earth": [],
+      "air": [],
+      "life": [],
+      "mind": [],
+      "sense": [],
+      "power": [],
+      "esence": []
     };
     let totalCarry = 0;
 
@@ -175,8 +176,8 @@ export class CamahavActorSheet extends ActorSheet {
       }
       // Append to spells.
       else if (i.type === 'spell') {
-        if (i.system.spellLevel != undefined) {
-          spells[i.system.spellLevel].push(i);
+        if (i.system.element != undefined) {
+          spells[i.system.element].push(i);
         }
       }
     }
