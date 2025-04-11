@@ -33,7 +33,7 @@
         <div class="resource flex-group-center">
           <label for="defense" class="resource-label">{{localize 'CAMAHAV.Defense'}}</label>
           <div class="resource-content flexrow flex-center flex-between">
-            <h4>{{defense}}</h4>
+            <h4>{{system.defense}}</h4>
           </div>
         </div>
       </div>
@@ -43,11 +43,11 @@
   {{!-- Sheet Tab Navigation --}}
   <nav class="sheet-tabs tabs" data-group="primary">
     {{!-- Default tab is specified in actor-sheet.mjs --}}
-    <a class="item" data-tab="features">Features</a>
-    <a class="item" data-tab="description">Description</a>
-    <a class="item" data-tab="items">Items</a>
-    <a class="item" data-tab="spells">Spells</a>
-    <a class="item" data-tab="effects">Effects</a>
+    <a class="item" data-tab="features">{{localize "CAMAHAV.Features"}}</a>
+    <a class="item" data-tab="description">{{localize "CAMAHAV.Description"}}</a>
+    <a class="item" data-tab="items">{{localize "CAMAHAV.Items"}}</a>
+    <a class="item" data-tab="spells">{{localize "CAMAHAV.Spells"}}</a>
+    <a class="item" data-tab="effects">{{localize "CAMAHAV.Effects"}}</a>
   </nav>
 
   {{!-- Sheet Body --}}

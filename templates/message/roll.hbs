@@ -1,38 +1,50 @@
-<div class="message flexcol" data-actor-id="{{actor._id}}">
-    <h3 class="label">{{localize 'CAMAHAV.Chat.RollLabel' speaker=actor.name label=label}}</h3>
-    {{#if status}}
-    <ol class="dice-rolls">
-        {{#each status}}
-        <li class="status-label"><img width="32px" src="{{this.icon}}" />{{localize this.label}}</li>
-        {{/each}}
-    </ol>
-    {{/if}}
-    <ol class="dice-rolls">
-        {{#each results}}
-        {{#each this}}
-        {{#if this.not}} <li class="d8-result">{{#unless this.free}}{{this.result}}{{/unless}}</li>{{/if}}
-        {{#if this.success}}<li class="d8-result success">{{#unless this.free}}{{this.result}}{{/unless}}</li>{{/if}}
-        {{#if this.double}} <li class="d8-result double">{{#unless this.free}}{{this.result}}{{/unless}}</li>{{/if}}
-        {{#if this.triple}} <li class="d8-result triple">{{#unless this.free}}{{this.result}}{{/unless}}</li>{{/if}}
-        {{/each}}
-        {{/each}}
-    </ol>
-    <div class="flexcol flex-center roll-result">
-        <h4>{{total}}</h4>
-        {{#if critRolls}}
-        <a class="crit"><i class="far fa-explosion"></i></a>
-        {{/if}}
-        {{#if blunderRolls}}
-        <a class="blunder"><i class="far fa-skull-crossbones"></i></a>
-        {{/if}}
+<div class="message" data-actor-id="{{actor._id}}">
+    <div class="flexrow">
+        <div class="sidebar flexshrink">
+            <img class="actor" src="{{actor.img}}" />
+            {{#if actor.system.defense}}
+            <i class="fas fa-shield"> {{actor.system.defense}}</i>
+            {{/if}}
+        </div>
+        <div class="flexcol">
+            <h3 class="label">{{localize label}}</h3>
+            {{#if status}}
+            <ol class="dice-rolls">
+                {{#each status}}
+                <li class="status-label"><img width="32px" src="{{this.icon}}" />{{localize this.label}}</li>
+                {{/each}}
+            </ol>
+            {{/if}}
+            <ol class="dice-rolls">
+                {{#each results}}
+                {{#each this}}
+                {{#if this.not}} <li class="d8-result">{{#unless this.free}}{{this.result}}{{/unless}}</li>{{/if}}
+                {{#if this.success}}<li class="d8-result success">{{#unless this.free}}{{this.result}}{{/unless}}</li>
+                {{/if}}
+                {{#if this.double}} <li class="d8-result double">{{#unless this.free}}{{this.result}}{{/unless}}</li>
+                {{/if}}
+                {{#if this.triple}} <li class="d8-result triple">{{#unless this.free}}{{this.result}}{{/unless}}</li>
+                {{/if}}
+                {{/each}}
+                {{/each}}
+            </ol>
+            <div class="flexcol flex-center roll-result">
+                <h4>{{total}}</h4>
+                {{#if critRolls}}
+                <a class="crit"><i class="far fa-explosion"></i></a>
+                {{/if}}
+                {{#if blunderRolls}}
+                <a class="blunder"><i class="far fa-skull-crossbones"></i></a>
+                {{/if}}
+            </div>
+            {{#if target}}
+            <p>{{localize "CAMAHAV.Target"}}: {{target}}</p>
+            {{/if}}
+            {{#if attack}}
+            <div>
+                <i class="fas fa-swords"></i> {{attack}}
+            </div>
+            {{/if}}
+        </div>
     </div>
-    {{#if target}}
-    <p>{{localize "CAMAHAV.Target"}}: {{target}}</p>
-    {{/if}}
-    {{#if attack}}
-    <div>
-    <i class="fas fa-swords"></i> {{attack}}
-    </div>
-    {{/if}}
-
 </div>
