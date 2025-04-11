@@ -72,7 +72,7 @@ export class CamahavActor extends Actor {
         if (systemData.abilities[key].value > 0) max_vigor += systemData.abilities[key].value
       }
     }
-    var obj = { system: { vigor: { max: max_vigor } } }
+    var obj = { system: { vigor: { value: Math.min(systemData.vigor.value, max_vigor), max: max_vigor } } }
     this.update(obj);
 
     var max_resolve = 0
@@ -81,7 +81,7 @@ export class CamahavActor extends Actor {
         if (systemData.abilities[key].value > 0) max_resolve += systemData.abilities[key].value
       }
     }
-    var obj = { system: { resolve: { max: max_resolve } } }
+    var obj = { system: { resolve: { value: Math.min(systemData.resolve.value, max_resolve), max: max_resolve } } }
     this.update(obj);
 
     // Calculate total defense
