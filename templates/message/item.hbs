@@ -1,0 +1,12 @@
+<div class="message" data-item-id="{{item._id}}">
+    <div class="flexcol">
+        <div class="flexrow">
+            <img class="flexshrink actor" src="{{item.img}}" />
+            <h3 class="label">{{localize item.name}}</h3>
+        </div>
+        {{{item.system.description}}}
+        {{#if magic}}
+        <div>{{item.system.element}}</div>
+        {{/if}}
+    </div>
+</div>

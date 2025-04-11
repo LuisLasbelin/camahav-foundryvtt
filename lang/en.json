@@ -74,8 +74,8 @@
     },
     "Item": {
       "Spell": {
-        "SpellLVL": "Level {level} Spells",
-        "AddLVL": "Add LVL {level}",
+        "Spell": "{element} Spells",
+        "Add": "Add {element}",
         "fire": "Fire",
         "water": "Water",
         "earth": "Earth",

@@ -16,6 +16,10 @@
   border: 3px solid #443627;
 }
 
+.interactible:hover {
+  text-shadow: 0px 0px 10px var(--color-shadow-primary);
+}
+
 .message {
   background-color: #F2F6D0;
   border: 3px solid #443627;
@@ -36,6 +40,7 @@
 .message .label {
   border-bottom: 3px solid #443627;
   box-shadow: 0px 2px 5px #443627;
+  height: fit-content;
 }
 .message .roll-result {
   align-self: center;
@@ -290,16 +295,19 @@
 .align-left {
   justify-content: flex-start;
   text-align: left;
+  align-items: flex-start;
 }
 
 .align-right {
   justify-content: flex-end;
   text-align: right;
+  align-items: flex-end;
 }
 
 .align-center {
   justify-content: center;
   text-align: center;
+  align-items: center;
 }
 
 /* Styles limited to camahav sheets */

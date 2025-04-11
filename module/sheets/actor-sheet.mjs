@@ -220,7 +220,7 @@ export class CamahavActorSheet extends ActorSheet {
     html.on('change', '.item-uses', (ev) => {
       const li = $(ev.currentTarget).parents('.item');
       const item = this.actor.items.get(li.data('itemId'));
-      item.update({ system: { uses: {value: ev.currentTarget.value} } })
+      item.update({ system: { uses: { value: ev.currentTarget.value } } })
     });
 
     html.on('click', '.item-attack', (ev) => {
@@ -238,6 +238,18 @@ export class CamahavActorSheet extends ActorSheet {
       const item = this.actor.items.get(li.data('itemId'));
       item.delete();
       li.slideUp(200, () => this.render(false));
+    });
+
+    html.on('click', '.item-add', (ev) => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.items.get(li.data('itemId'));
+      item.update({ system: { quantity: Math.max(0, item.system.quantity + 1) } })
+    });
+
+    html.on('click', '.item-reduce', (ev) => {
+      const li = $(ev.currentTarget).parents('.item');
+      const item = this.actor.items.get(li.data('itemId'));
+      item.update({ system: { quantity: Math.max(0, item.system.quantity - 1) } })
     });
 
     // Active Effect management

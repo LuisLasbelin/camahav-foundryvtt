@@ -46,14 +46,20 @@ export class CamahavItem extends Item {
     const rollMode = game.settings.get('core', 'rollMode');
     const label = `[${item.type}] ${item.name}`;
 
-    // If there's no roll data, send a chat message.
-    if (!this.system.formula) {
-      ChatMessage.create({
-        speaker: speaker,
-        rollMode: rollMode,
-        flavor: label,
-        content: item.system.description ?? '',
-      });
+    // If there's no value to roll, send a chat message.
+    if (!this.system.value) {
+      const messageData = {
+        item: item,
+        magic: item.type === "spell",
+      }
+
+      const content = await renderTemplate('systems/camahav/templates/message/item.hbs', messageData)
+
+      const msg = await ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        content: content,
+        rollMode: game.settings.get('core', 'rollMode'),
+      })
     }
     // Otherwise, create a roll and send a chat message from it.
     else {
@@ -74,7 +80,7 @@ export class CamahavItem extends Item {
     const item = this;
     const rollData = this.getRollData();
 
-    const skill = this.actor.items.filter((e)=>e.system.id === rollData.weaponType)[0].getRollData()
+    const skill = this.actor.items.filter((e) => e.system.id === rollData.weaponType)[0].getRollData()
 
     return new AbilityRoll(
       this.actor,
